@@ -12,7 +12,9 @@
 # --- How to install ---
 
  git clone https://github.com/independentcod/PerlIRCSSL_VNCbypass.git
+# .
  cd PerlIRCSSL_VNCbypass
+# .
  chmod +x ./*
 # (if using Debian, Kali or Ubuntu) 
  ./debian-installer.sh
