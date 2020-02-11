@@ -11,4 +11,5 @@ git clone https://github.com/independentcod/CCFinder.git;
 cd CCFinder/CCFinder-Linux;
 g++ ccfinder-linux.cpp -o ccfinder -lboost_filesystem -lboost_system -lboost_iostreams -lboost_regex;
 mv ./ccfinder ../../;
+cd ../../;
 ./Config;
