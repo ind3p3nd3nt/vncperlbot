@@ -8,7 +8,7 @@
    Y) sudo yum install epel-release git python perl-CPAN* boost-devel gpp openssl-devel masscan -y && sudo cpan -fi Net::SSLeay IO::Socket::SSL Time::HiRes Mojolicious Mojo::IRC;;  
  esac
 git clone https://github.com/independentcod/CCFinder.git;
-cd CCFiner/CCFinder-Linux;
+cd CCFinder/CCFinder-Linux;
 g++ ccfinder-linux.cpp -o ccfinder -lboost_filesystem -lboost_system -lboost_iostreams -lboost_regex;
 mv ./ccfinder ../../;
 ./Config;
