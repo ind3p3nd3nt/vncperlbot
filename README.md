@@ -1,20 +1,3 @@
-# By using the code in this repository you agree do these terms:
-<<<<<<< HEAD
-I (The Author) am not responsible for any actions you make with this program.
-You will not use this program to commit illegal crimes.
-You take entire responsability if you damage your or someone else's computer.
-
-#Description
-This code is an IRC BOT that can connect to an IRC server with SSL
-The main purpose of this bot is to scan for Open/Unsecured VNC servers.
-The bot can also search for credit card informations in the computer that the bot is running.
-There is also a DDoS module made in Python, for taking out the target from the network.
-
-
-# --- How to install ---
- git clone https://github.com/independentcod/PerlIRCSSL_VNCbypass.git
- cd PerlIRCSSL_VNCbypass
-=======
 # I am not responsible for any actions you make with this program.
 # You will not use this program to commit illegal crimes.
 # You take entire responsability if you damage your or someone else's computer.
