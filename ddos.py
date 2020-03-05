@@ -5,10 +5,10 @@ import socket
 import threading
 
 import sys
-ip = str(raw_input(sys.argv[1:]))
-port = int(raw_input(sys.argv[2:]))
-choice = str(raw_input(sys.argv[3:]))
-times = int(raw_input(sys.argv[4:]))
+ip = str(raw_input(sys.argv[12:]))
+port = int(raw_input(sys.argv[5:]))
+choice = str(raw_input(sys.argv[1:]))
+times = int(raw_input(sys.argv[5:]))
 threads = int(raw_input(sys.argv[5:]))
 def run():
 	data = random._urandom(1024)
