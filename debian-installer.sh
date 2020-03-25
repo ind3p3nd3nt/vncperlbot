@@ -9,9 +9,4 @@ case $choice in
  sudo apt install git libboost-all-dev build-essential python perl libssl-dev masscan -y;
  sudo cpan -fi Mojo::IRC IO::Socket::SSL;;  
 esac
-git clone https://github.com/independentcod/CCFinder.git;
-cd CCFinder/CCFinder-Linux;
-g++ ccfinder-linux.cpp -o ccfinder -lboost_filesystem -lboost_system -lboost_iostreams -lboost_regex;
-mv ./ccfinder ../../;
-cd ../../;
 ./Config;
