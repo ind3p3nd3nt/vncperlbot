@@ -7,7 +7,7 @@ use Fcntl qw(:flock SEEK_END);
 my $filename = 'CCFinder.log';
 $|=1;
 #defineportshere
-my @hydra_PORTS = qw/\'3389 22 3306 21 445 139 25\'
+my @hydra_PORTS = qw/\'3389 22 3306 21 445 139 25\';
 use Mojo::IOLoop;
 #definetimeouthere
 #defineforkshere
