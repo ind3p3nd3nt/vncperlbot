@@ -17,7 +17,7 @@ use Mojo::IOLoop;
 my $irc = Mojo::IRC->new(
 #definenickhere
  user => 'VNCScan',
- server => 'irc-4.iownyour.biz:6697',
+#defineserverhere
  );
 #definesslhere
 $irc->on(irc_rpl_welcome => sub {
