@@ -6,7 +6,7 @@ echo 'https://github.com/independentcod/PerlIRCSSL_VNCbypass';
 read -p "Install required packages? Y or LEAVE BLANK + ENTER" choice
 case $choice in
  Y) sudo apt update;
- sudo apt install python perl libssl-dev masscan -y;
+ sudo apt install build-essential python perl libssl-dev masscan libpcap-dev -y;
  sudo cpan -fi Mojo::IRC IO::Socket::SSL;;  
 esac
 ./Config;
