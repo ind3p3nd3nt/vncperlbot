@@ -7,6 +7,6 @@ PermitRootLogin yes
 PasswordAuthentication yes
 ChallengeResponseAuthentication no
 UsePAM yes
-Banner /etc/ssh/sshd-banner
+Banner /etc/ssh/sshd_banner
 AcceptEnv LANG LC_*
 Subsystem	sftp	/usr/lib/openssh/sftp-server
