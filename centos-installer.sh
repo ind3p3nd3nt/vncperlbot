@@ -5,13 +5,14 @@
   echo 'https://github.com/independentcod/PerlIRCSSL_VNCbypass';
   read -p "Install required packages? Y or LEAVE BLANK + ENTER" choice
   case $choice in
-   Y) sudo yum install epel-release git python perl-CPAN* openssl-devel libpcap-devel -y;
+   Y) sudo yum install epel-release git python openssl-devel libpcap-devel -y;
    sudo yum groupinstall "Development Tools" -y;
  git clone https://github.com/robertdavidgraham/masscan.git;
  cd masscan;
  make -j8;
  sudo make install;
  cd ..;
- sudo cpan -fi Digest::MD5 Net::SSLeay IO::Socket::SSL Time::HiRes Mojolicious Mojo::IRC;  
+ curl -L https://cpanmin.us | perl - --sudo App::cpanminus
+ sudo cpanm -fi Digest::MD5 Net::SSLeay IO::Socket::SSL Time::HiRes Mojolicious Mojo::IRC;  
  esac
 ./Config;
