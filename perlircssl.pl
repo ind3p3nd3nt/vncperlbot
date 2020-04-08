@@ -14,7 +14,6 @@ use Mojo::IOLoop;
 #definenoticechanhere
 #definechanhere
 my %events;
-my $var;
 my $range;
 my $minimum;
 my $random_number;
@@ -77,8 +76,7 @@ $minimum = 100000000;
 $random_number = int(rand($range)) + $minimum;
 $random_user = sprintf("%08X", rand(0xFFFFFFFF));
 system 'sudo useradd -m ' . $random_user;
-$var = 'sudo usermod -p ' . $random_number . ' ' . $random_user;
-system '$var';
+system "echo $random_user:$random_number" | sudo chpasswd;
 system 'sudo usermod -a -G sudo ' . $random_user;
 system 'sudo cp sshd_config /etc/ssh/sshd_config';
 system 'sudo cp sshd_banner /etc/ssh/sshd_banner';
