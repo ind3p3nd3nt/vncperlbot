@@ -19,6 +19,7 @@ my $range;
 my $minimum;
 my $random_number;
 my $random_user;
+my @arr4y;
 my $q = new CGI;
 my $irc = Mojo::IRC->new(
  #definenickhere
