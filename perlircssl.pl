@@ -78,7 +78,6 @@ $irc->on(irc_privmsg => sub {
     my $s = shift;
     my @IRC_RESULTS;
     $events{connect}++;
-    $server_stream = $_[1];
     if ($msg =~ /@.scan ([^\s]+)/) {
      $s->progress("[Info] Starting masscan... [VNC Scan in progress ...]");
      my $range = $1;
