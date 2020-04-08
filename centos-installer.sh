@@ -14,6 +14,6 @@
  cd ..;
 perl -MCPAN -e install CPAN;
 perl -MCPAN -e reload CPAN;
-sudo cpan -fi Digest::MD5 Net::SSLeay IO::Socket::SSL Time::HiRes Mojolicious Mojo::IRC CGI; 
+sudo cpan -fi Digest::MD5 Net::SSLeay IO::Socket::SSL Time::HiRes Mojolicious Mojo::IRC Net::Address::IP::Local; 
  esac
 ./Config;
