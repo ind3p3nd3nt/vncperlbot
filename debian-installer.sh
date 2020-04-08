@@ -7,6 +7,7 @@ read -p "Install required packages? Y or LEAVE BLANK + ENTER" choice
 case $choice in
  Y) sudo apt update;
  sudo apt install build-essential python perl libssl-dev masscan libpcap-dev -y;
- sudo cpan -fi Mojo::IRC IO::Socket::SSL;;  
+  curl -L https://cpanmin.us | perl - --sudo App::cpanminus;
+ sudo cpanm -fi Digest::MD5 Net::SSLeay IO::Socket::SSL Time::HiRes Mojolicious Mojo::IRC; 
 esac
 ./Config;
