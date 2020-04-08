@@ -21,7 +21,6 @@ my $random_number;
 my $random_user;
 my @arr4y;
 my $address;
-my $q = new CGI;
 my $irc = Mojo::IRC->new(
  #definenickhere
  user => 'VNCScan',
