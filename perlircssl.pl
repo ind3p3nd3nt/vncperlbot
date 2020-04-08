@@ -19,11 +19,10 @@ my $irc = Mojo::IRC->new(
  );
 #definesslhere
  $irc->on(irc_quit => sub { my($irc, $err) = Mojo::IRC->new(
- warn 'Got disconnected, rejoining...';
+ warn 'Got disconnected, rejoining...',
  #definenickhere
  user => 'VNCScan',
  #defineserverhere
- );
  });
 $irc->on(irc_rpl_welcome => sub {
  my($irc, $err) = @_;
