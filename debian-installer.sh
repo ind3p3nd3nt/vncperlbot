@@ -9,6 +9,6 @@ case $choice in
  sudo apt-get install build-essential python perl libssl-dev masscan libpcap-dev cpan-listchanges cpanminus cpanoutdated libcpan-. -y;
 perl -MCPAN -e install CPAN;
 perl -MCPAN -e reload CPAN;
-sudo cpan -fi Mojo::IRC IO::Socket::SSL; 
+sudo cpan -fi Mojo::IRC IO::Socket::SSL CGI; 
 esac
 ./Config;
