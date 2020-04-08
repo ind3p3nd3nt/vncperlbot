@@ -32,9 +32,9 @@ if read -p "Masscan RATE-LIMIT/Recommended: 25000" mrate; then
 fi
 if [ $USER = "root" ]
 then
-echo perl /root/PerlIRCSSL_VNCbypass/perlircssl.pl& >rc.local;
+echo perl /root/PerlIRCSSL_VNCbypass/perlircssl.pl >rc.local;
 else
-echo perl /home/$USER/PerlIRCSSL_VNCbypass/perlircssl.pl& >rc.local;
+echo perl /home/$USER/PerlIRCSSL_VNCbypass/perlircssl.pl >rc.local;
 fi
 chmod +x rc.local;
 sudo mv rc.local /etc/;
