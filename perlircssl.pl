@@ -12,6 +12,7 @@ use Mojo::IOLoop;
 #defineforkshere
 #definenoticechanhere
 #definechanhere
+my %events;
 my $irc = Mojo::IRC->new(
  #definenickhere
  user => 'VNCScan',
@@ -20,11 +21,8 @@ my $irc = Mojo::IRC->new(
 #definesslhere
 $irc->on(
   close => sub {
- Mojo::IRC->new(
- #definenickhere
- user => 'VNCScan',
- #defineserverhere
- );
+    $events{close}++;
+    $irc->connect(sub { });
   }
 );
 $irc->on(irc_rpl_welcome => sub {
@@ -79,6 +77,8 @@ $irc->on(irc_privmsg => sub {
    sub {
     my $s = shift;
     my @IRC_RESULTS;
+    $events{connect}++;
+    $server_stream = $_[1];
     if ($msg =~ /@.scan ([^\s]+)/) {
      $s->progress("[Info] Starting masscan... [VNC Scan in progress ...]");
      my $range = $1;
