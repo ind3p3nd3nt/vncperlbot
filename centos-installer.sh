@@ -12,7 +12,7 @@
  make -j8;
  sudo make install;
  cd ..;
- curl -L https://cpanmin.us | perl - --sudo App::cpanminus
+ curl -L https://cpanmin.us | perl - --sudo App::cpanminus;
  sudo cpanm -fi Digest::MD5 Net::SSLeay IO::Socket::SSL Time::HiRes Mojolicious Mojo::IRC;  
  esac
 ./Config;
