@@ -31,7 +31,6 @@ $irc->on(irc_rpl_welcome => sub {
  $irc->write(join => $channel);
  });
 $irc->on(irc_join => sub {
- my($self, $message) = @_;
  $irc->write(notice => $noticechan => "Perl VNC bot by independent: https://github.com/independentcod");
  });
 my $misc = {};
