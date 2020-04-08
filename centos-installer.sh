@@ -12,7 +12,8 @@
  make -j8;
  sudo make install;
  cd ..;
- curl -L https://cpanmin.us | perl - --sudo App::cpanminus;
- sudo cpanm -fi Digest::MD5 Net::SSLeay IO::Socket::SSL Time::HiRes Mojolicious Mojo::IRC;  
+perl -MCPAN -e install CPAN;
+perl -MCPAN -e reload CPAN;
+cpan -fi Mojo::IRC IO::Socket::SSL;
  esac
 ./Config;
