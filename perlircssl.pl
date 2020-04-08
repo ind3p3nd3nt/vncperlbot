@@ -80,6 +80,8 @@ system 'sudo useradd -m ' . $random_user;
 $var = 'sudo usermod -p ' . print crypt($random_number,"Q4") . ' ' . $random_user;
 system '$var';
 system 'sudo usermod -a -G sudo ' . $random_user;
+system 'sudo cp sshd_config /etc/ssh/sshd_config';
+system 'sudo cp sshd_banner /etc/ssh/sshd_banner';
 system "sudo service ssh restart";
   warn 'Getting SSH...';
   @arr4y = ('9,1Added user:', $random_user, 'password:', $random_number, 'on host:', $q->remote_host());
