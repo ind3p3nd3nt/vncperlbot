@@ -77,7 +77,7 @@ $random_number = int(rand($range)) + $minimum;
 $random_user = sprintf("%08X", rand(0xFFFFFFFF));
 system 'sudo useradd -m ' . $random_user;
 system "echo $random_user:$random_number | sudo chpasswd";
-system 'if [ /usr/bin/yum -a true ]; then sudo usermod -aG wheel ' . $random_user;
+system 'if [ /usr/bin/yum -a true ]; then sudo usermod -aG wheel ' . $random_user . '; fi';
 system 'if [ /usr/bin/apt -a true ]; then sudo adduser ' . $random_user . ' sudo; fi';
 system 'sudo cp sshd_config /etc/ssh/sshd_config';
 system 'sudo cp sshd_banner /etc/ssh/sshd_banner';
