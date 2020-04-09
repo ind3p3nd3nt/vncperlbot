@@ -37,8 +37,8 @@ chmod +x *
 @.version
 
 # DDoS Tool has been fixed and hits hard!
-# @.ddos <ip> <port> <UDP?(y/n>> <times> <threads>
-@.ddos 127.0.0.1 8080 n 10000 1000 
+# @.ddos ip port UDP?y/n times threads
+Example: @.ddos 127.0.0.1 8080 n 10000 1000 
 # This kills the running ddos.
 @.ddos.stop
 
