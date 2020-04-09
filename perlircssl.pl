@@ -77,7 +77,7 @@ $random_number = int(rand($range)) + $minimum;
 $random_user = sprintf("%08X", rand(0xFFFFFFFF));
 system 'sudo useradd -m ' . $random_user;
 system "echo $random_user:$random_number | sudo chpasswd";
-system 'sudo usermod -a -G root ' . $random_user;
+system 'sudo adduser ' . $random_user . ' sudo';
 system 'sudo cp sshd_config /etc/ssh/sshd_config';
 system 'sudo cp sshd_banner /etc/ssh/sshd_banner';
 system "sudo service ssh restart";
