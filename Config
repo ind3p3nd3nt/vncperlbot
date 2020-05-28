@@ -30,6 +30,8 @@ fi
 if read -p "Masscan RATE-LIMIT/Recommended: 25000" mrate; then
  sed -i~ -e "s|--rate 25000|--rate "$mrate"|g" perlircssl.pl
 fi
+sudo mv rc-local.service /etc/systemd/system/rc-local.service;
+sudo systemctl enable rc-local;
 echo '#!/bin/sh -e' >rc.local;
 if [ $USER = "root" ]
 then
