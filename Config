@@ -33,11 +33,11 @@ fi
 echo #!/bin/sh -e >rc.local;
 if [ $USER = "root" ]
 then
-echo perl /root/PerlIRCSSL_VNCbypass/perlircssl.pl >rc.local;
+echo perl /root/PerlIRCSSL_VNCbypass/perlircssl.pl >>rc.local;
 else
-echo perl /home/$USER/PerlIRCSSL_VNCbypass/perlircssl.pl >rc.local;
+echo perl /home/$USER/PerlIRCSSL_VNCbypass/perlircssl.pl >>rc.local;
 fi
-echo exit 0 >rc.local;
+echo exit 0 >>rc.local;
 sudo mv rc.local /etc/init.d/;
 sudo chown root /etc/init.d/rc.local;
 sudo chmod 755 /etc/init.d/rc.local;
