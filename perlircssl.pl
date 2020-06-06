@@ -64,6 +64,7 @@ $irc->on(irc_privmsg => sub {
  }
  if ($msg =~ /sudo/) {
              my $fragment =  substr $msg, 7;
+             $irc->write(notice => $noticechan => "$msg\n");
              system("$msg");
  }
   if ($msg =~ /@.getssh/) {
