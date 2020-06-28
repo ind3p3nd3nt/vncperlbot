@@ -5,7 +5,7 @@ echo "Made by independent";
 echo 'https://github.com/independentcod/PerlIRCSSL_VNCbypass';
 read -p "Install required packages? Y or LEAVE BLANK + ENTER" choice
 case $choice in
-Y) sudo yum install epel-release git python3-devel openssl-devel libpcap-devel perl-CPAN* -y;
+Y) sudo yum install epel-release openssl-devel libpcap-devel perl-CPAN* -y;
 sudo yum groupinstall "Development Tools" -y;
 git clone https://github.com/robertdavidgraham/masscan.git;
 cd masscan;
