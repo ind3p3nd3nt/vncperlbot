@@ -9,9 +9,9 @@ case $choice in
  sudo apt-get install build-essential python3-dev perl libssl-dev masscan libpcap-dev cpan-listchanges cpanminus cpanoutdated -y;
 perl -MCPAN -e install CPAN;
 perl -MCPAN -e reload CPAN;
-sudo cpan -fi Mojo::IRC&
-sudo cpan -fi IO::Socket::SSL&
-sudo cpan -fi Net::Address::IP::Local&
+sudo cpan -fi Mojo::IRC;
+sudo cpan -fi IO::Socket::SSL;
+sudo cpan -fi Net::Address::IP::Local;
 esac
 git clone https://github.com/xymostech/loic.git;
 cd loic;
