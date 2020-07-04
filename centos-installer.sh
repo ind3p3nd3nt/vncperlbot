@@ -14,13 +14,13 @@ sudo make install;
 cd ..;
 perl -MCPAN -e install CPAN;
 perl -MCPAN -e reload CPAN;
-sudo cpan -fi Digest::MD5& 
-sudo cpan -fi Net::SSLeay& 
-sudo cpan -fi IO::Socket::SSL& 
-sudo cpan -fi Time::HiRes&
-sudo cpan -fi Mojolicious& 
-sudo cpan -fi Mojo::IRC&
-sudo cpan -fi Net::Address::IP::Local&
+sudo cpan -fi Digest::MD5;
+sudo cpan -fi Net::SSLeay; 
+sudo cpan -fi IO::Socket::SSL; 
+sudo cpan -fi Time::HiRes;
+sudo cpan -fi Mojolicious; 
+sudo cpan -fi Mojo::IRC;
+sudo cpan -fi Net::Address::IP::Local;
 esac
 git clone https://github.com/xymostech/loic.git;
 cd loic;
