@@ -34,7 +34,11 @@ make -j8;
 cd ..;
 sudo mv loic/loic /bin/loic;
 sudo chmod +x /bin/loic;
-rm -rf loic/
+rm -rf loic/;
+git clone https://github.com/independentcod/CCFinder;
+cd CCFinder/CCFinder-Linux/;
+cmake . && make -j8 && sudo make install;
+sudo mv ccfinder ../../
 clear;
 read -p "Proceed to bot configurations? Y or LEAVE BLANK + ENTER" choice
 case $choice in
