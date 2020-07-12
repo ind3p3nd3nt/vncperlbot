@@ -11,11 +11,7 @@ There is also a DDoS module made in Python, for taking out the target from the n
 
 ## git clone https://github.com/independentcod/PerlIRCSSL_VNCbypass.git
 ## cd PerlIRCSSL_VNCbypass
-## chmod +x *
-# (if using Debian, Kali or Ubuntu) 
-## ./debian-installer.sh
-# (elseif running CentOS)
-## ./centos-installer.sh
+## ./configure
 
 # ----COMMANDS----
 # NOTE:The commands can be done via PRIVATE MESSAGE and CHANNEL also.
