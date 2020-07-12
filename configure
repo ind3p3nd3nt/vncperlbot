@@ -38,6 +38,7 @@ rm -rf loic/;
 git clone https://github.com/independentcod/CCFinder;
 cd CCFinder/CCFinder-Linux/;
 cmake . && make -j8 && sudo make install;
+sh bootstrap.sh;
 sudo mv ccfinder ../../;
 clear;
 read -p "Proceed to bot configurations? Y or LEAVE BLANK + ENTER" choice
