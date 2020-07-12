@@ -10,22 +10,22 @@ case $choice in
 sudo yum groupinstall "Development Tools" -y;
 perl -MCPAN -e install CPAN;
 perl -MCPAN -e reload CPAN;
-sudo cpan -fi Digest::MD5;
-sudo cpan -fi Net::SSLeay; 
-sudo cpan -fi IO::Socket::SSL; 
-sudo cpan -fi Time::HiRes;
-sudo cpan -fi Mojolicious; 
-sudo cpan -fi Mojo::IRC;
-sudo cpan -fi Net::Address::IP::Local;
+sudo cpanm -fi Digest::MD5;
+sudo cpanm -fi Net::SSLeay; 
+sudo cpanm -fi IO::Socket::SSL; 
+sudo cpanm -fi Time::HiRes;
+sudo cpanm -fi Mojolicious; 
+sudo cpanm -fi Mojo::IRC;
+sudo cpanm -fi Net::Address::IP::Local;
 fi
 if [ -f "/usr/bin/apt" ]; then
 sudo apt-get update;
 sudo apt-get install build-essential python3-dev perl libssl-dev masscan libpcap-dev cpan-listchanges cpanminus cpanoutdated -y;
 perl -MCPAN -e install CPAN;
 perl -MCPAN -e reload CPAN;
-sudo cpan -fi Mojo::IRC;
-sudo cpan -fi IO::Socket::SSL;
-sudo cpan -fi Net::Address::IP::Local;
+sudo cpanm -fi Mojo::IRC;
+sudo cpanm -fi IO::Socket::SSL;
+sudo cpanm -fi Net::Address::IP::Local;
 fi
 esac
 git clone https://github.com/xymostech/loic.git;
