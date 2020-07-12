@@ -6,7 +6,7 @@ echo 'https://github.com/independentcod/PerlIRCSSL_VNCbypass';
 read -p "Install required packages? Y or LEAVE BLANK + ENTER" choice
 case $choice in
  Y) if [ -f "/usr/bin/yum" ]; then
-    sudo yum install epel-release openssl-devel libpcap-devel perl-CPAN* -y;
+    sudo yum install epel-release openssl-devel boost-devel libpcap-devel perl-CPAN* -y;
 sudo yum groupinstall "Development Tools" -y;
 perl -MCPAN -e install CPAN;
 perl -MCPAN -e reload CPAN;
@@ -20,7 +20,7 @@ sudo cpanm -fi Net::Address::IP::Local;
 fi
 if [ -f "/usr/bin/apt" ]; then
 sudo apt-get update;
-sudo apt-get install build-essential python3-dev perl libssl-dev masscan libpcap-dev cpan-listchanges cpanminus cpanoutdated -y;
+sudo apt-get install build-essential python3-dev perl libboost-dev libssl-dev masscan libpcap-dev cpan-listchanges cpanminus cpanoutdated -y;
 perl -MCPAN -e install CPAN;
 perl -MCPAN -e reload CPAN;
 sudo cpanm -fi Mojo::IRC;
