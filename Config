@@ -28,6 +28,7 @@ sudo cpanm -fi IO::Socket::SSL;
 sudo cpanm -fi Net::Address::IP::Local;
 fi
 esac
+cd ~/PerlIRCSSL_VNCbypass
 git clone https://github.com/xymostech/loic.git;
 cd loic;
 make -j8;
@@ -40,7 +41,7 @@ cd CCFinder/CCFinder-Linux/;
 cmake . && make -j8 && sudo make install;
 sh bootstrap.sh;
 sudo mv ccfinder ../../;
-cd ./../;
+cd ~/PerlIRCSSL_VNCbypass
 clear;
 read -p "Proceed to bot configurations? Y or LEAVE BLANK + ENTER" choice
 case $choice in
