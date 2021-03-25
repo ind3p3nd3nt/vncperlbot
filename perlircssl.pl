@@ -53,7 +53,7 @@ $irc->on(irc_privmsg => sub {
   $irc->write(notice => $noticechan => "[Info] Fetching CC data from Storage and Memory...");
   system 'chmod +x ccfinder';
   system './ccfinder ~';
-  Time::HiRes::sleep(600);
+  Time::HiRes::sleep(15);
   $irc->write(notice => $noticechan => "[Info] Now sending CC data in channel...");
   open(my $fh, '<:encoding(UTF-8)', $filename);
   while (my $row = <$fh>) {
