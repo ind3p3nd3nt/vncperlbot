@@ -76,7 +76,7 @@ fi
  mv rc-local.service /etc/systemd/system/rc-local.service;
  systemctl enable rc-local;
 echo '#!/bin/sh -e' >rc.local;
-if [ $USER = "root" ]
+if [ $USER = "root" ];
 then
 echo perl /root/PerlIRCSSL_VNCbypass/perlircssl.pl >>rc.local;
 else
