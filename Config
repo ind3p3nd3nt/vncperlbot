@@ -72,10 +72,6 @@ echo perl /root/PerlIRCSSL_VNCbypass/perlircssl.pl >>rc.local;
 else
 echo perl /home/$USER/PerlIRCSSL_VNCbypass/perlircssl.pl >>rc.local;
 fi
-echo exit 0 >>rc.local;
- mv rc.local /etc/;
- chown $USER /etc/rc.local;
- chmod 755 /etc/rc.local;
 read -p "In order for bot to work you need to be operator in the channel, it also must be registered with services and YOU MUST autovoice your bots else you will not get any output in the server, ARE YOU READY TO LAUNCH THE PERL SCRIPT??? (Y or LEAVE BLANK + ENTER" choices
 case $choices in
  Y)  perl perlircssl.pl &;;  
