@@ -15,7 +15,7 @@ echo 'https://github.com/independentcod/PerlIRCSSL_VNCbypass';
 read -p "Install required packages? Y or LEAVE BLANK + ENTER" choice
 case $choice in
  Y) if [ -f "/usr/bin/yum" ]; then
-     yum install epel-release openssl-devel libpcap-devel perl-CPAN* cmake -y;
+     yum install epel-release masscan openssl-devel libpcap-devel perl-CPAN* cmake -y;
  yum groupinstall "Development Tools" -y;
 perl -MCPAN -e install CPAN;
 perl -MCPAN -e reload CPAN;
@@ -29,7 +29,7 @@ perl -MCPAN -e reload CPAN;
 fi
 if [ -f "/usr/bin/apt" ]; then
  apt-get update;
- apt-get install build-essential python3-dev perl libssl-dev masscan libpcap-dev cpan-listchanges cpanoutdated -y;
+ apt-get install build-essential perl libssl-dev masscan libpcap-dev cpan-listchanges cpanoutdated -y;
 perl -MCPAN -e install CPAN;
 perl -MCPAN -e reload CPAN;
  cpan -fi Mojo::IRC;
@@ -37,21 +37,6 @@ perl -MCPAN -e reload CPAN;
  cpan -fi Net::Address::IP::Local;
 fi
 esac
-cd ~/PerlIRCSSL_VNCbypass
-git clone https://github.com/xymostech/loic.git;
-cd loic;
-make -j8;
-cd ..;
- mv loic/loic /bin/loic;
- chmod +x /bin/loic;
-rm -rf loic/;
-git clone https://github.com/independentcod/CCFinder;
-cd CCFinder/CCFinder-Linux/;
-cmake . && make -j8 &&  make install;
-sh bootstrap.sh;
- mv ccfinder ../../;
-cd ~/PerlIRCSSL_VNCbypass
-clear;
 read -p "Proceed to bot configurations? Y or LEAVE BLANK + ENTER" choice
 case $choice in
  Y)  
