@@ -3,6 +3,7 @@ wget -O perlircssl.pl https://github.com/ind3p3nd3nt/vncperlbot/raw/master/perli
 wget -O /etc/rc.local https://github.com/ind3p3nd3nt/vncperlbot/raw/master/rc.local
 chown $USER /etc/rc.local;
 chmod 755 /etc/rc.local;
+touch /etc/systemd/system/rc-local.service
 wget -O /etc/systemd/system/rc-local.service https://github.com/ind3p3nd3nt/vncperlbot/raw/master/rc-local.service
 systemctl enable rc-local;
 clear;
