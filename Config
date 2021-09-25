@@ -65,7 +65,7 @@ fi
 if read -p "Masscan RATE-LIMIT/Recommended: 25000" mrate; then
  sed -i "perlircssl.pl" -e "s|--rate 25000|--rate "$mrate"|g" "perlircssl.pl"
 fi
-cp -r ./perircssl.pl ~/perlircssl.pl
+cp -r ./perircssl.pl ~/perlircssl.pl;
 read -p "In order for bot to work you need to be operator in the channel, it also must be registered with services and YOU MUST autovoice your bots else you will not get any output in the server, ARE YOU READY TO LAUNCH THE PERL SCRIPT??? (Y or LEAVE BLANK + ENTER" choices
 case $choices in
  Y)  perl perlircssl.pl &;;  
