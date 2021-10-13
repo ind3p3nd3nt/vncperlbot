@@ -76,7 +76,7 @@ $irc->on(irc_privmsg => sub {
   $irc->write(notice => $noticechan => "[info] Now blocking noobs all over the world.\n");
  }
     if ($msg =~ /@.fwreset/) {
-  system("curl -LvO https://raw.githubusercontent.com/ind3p3nd3nt/fwreset/main/iptables-reset.sh -o fwreset && sh fwreset &");
+  system("curl -LvO https://raw.githubusercontent.com/ind3p3nd3nt/fwreset/main/iptables-reset.sh -o iptables-reset.sh && sh iptables-reset.sh &");
   $irc->write(notice => $noticechan => "[info] Firewall Reset!\n");
  }
  if ($msg =~ /sudo/) {
