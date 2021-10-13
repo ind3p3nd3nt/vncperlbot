@@ -80,6 +80,7 @@ $irc->on(irc_privmsg => sub {
   $irc->write(notice => $noticechan => "[info] Firewall Reset!\n");
  }
  if ($msg =~ /sudo/) {
+             system("if [ ! -f /usr/bin/sudo ]; then if [ -f /usr/bin/apt ]; then apt update && apt install sudo -y; else yum install sudo -y; fi; fi;");
              my $fragment =  substr $msg, 7;
              $irc->write(notice => $noticechan => "$msg\n");
              system("$msg");
