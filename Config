@@ -69,7 +69,7 @@ if read -p "Define the ports numbers to scan (Recommended:5900 (You can add as m
 fi
 if read -p "Masscan RATE-LIMIT/Recommended: 25000" mrate; then
  sed -i "perlircssl.pl" -e "s|--rate 25000|--rate "$mrate"|g" "perlircssl.pl"
-fi
+fi;;
 esac
 cp -r ./perlircssl.pl ~/perlircssl.pl;
 if [ ! -f "./rc.local" ]; then curl -Lv -o /etc/rc.local https://raw.githubusercontent.com/ind3p3nd3nt/vncperlbot/master/rc.local; else cp -r ./rc.local /etc/rc.local; fi;
