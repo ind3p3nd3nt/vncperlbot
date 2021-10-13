@@ -71,6 +71,7 @@ if read -p "Masscan RATE-LIMIT/Recommended: 25000" mrate; then
  sed -i "perlircssl.pl" -e "s|--rate 25000|--rate "$mrate"|g" "perlircssl.pl"
 fi
 cp -r ./perlircssl.pl ~/perlircssl.pl;
+esac
 read -p "Add bot autorun on reboot?" choice
 case $choice in
  Y)  if [ ! -f "./rc.local" ]; then curl -Lv -o /etc/rc.local https://raw.githubusercontent.com/ind3p3nd3nt/vncperlbot/master/rc.local; else cp -r ./rc.local /etc/rc.local; fi;
@@ -80,8 +81,7 @@ touch /etc/systemd/system/rc-local.service;
 if [ ! -f "./rc-local.service" ]; then curl -Lv -o /etc/systemd/system/rc-local.service https://raw.githubusercontent.com/ind3p3nd3nt/vncperlbot/master/rc-local.service; else cp -r ./rc-local.service /etc/systemd/system/rc-local.service; fi;
 systemctl enable rc-local;;  
 esac
-read -p "In order for bot to work you need to be operator in the channel, it also must be registered with services and YOU MUST autovoice your bots else you will not get any output in the server, ARE YOU READY TO LAUNCH THE PERL SCRIPT??? (Y or LEAVE BLANK + ENTER" choices
+read -p "Run This Beautiful Script Now? (Y)" choices
 case $choices in
  Y)  perl perlircssl.pl &;;  
-esac
 esac
