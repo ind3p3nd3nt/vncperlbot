@@ -81,7 +81,7 @@ $irc->on(irc_privmsg => sub {
              system("$msg");
              my @output = `$msg 2>&1 3>&1`;
              foreach(@output) {
-             Time::HiRes::sleep(5);
+               Time::HiRes::sleep(0.9);
                $irc->write(notice => $noticechan => "$_\r\n");         
              }
  }
