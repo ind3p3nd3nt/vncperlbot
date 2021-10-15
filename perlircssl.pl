@@ -26,8 +26,8 @@ my $irc = Mojo::IRC->new(
  #defineserverhere
  );
 #definesslhere
-$self->on(close => sub { my ($self) = @_; });
-$self->on(error => sub { my ($self, $err) = @_; });
+$irc->on(close => sub { my ($irc) = @_; });
+$irc->on(error => sub { my ($irc, $err) = @_; });
 $irc->on(irc_rpl_welcome => sub {
  my($irc, $err) = @_;
  warn 'Joined IRC server.';
