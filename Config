@@ -2,8 +2,8 @@
 if [ ! -f "./perlircssl.pl" ]; then curl -o perlircssl.pl -Lv https://raw.githubusercontent.com/ind3p3nd3nt/vncperlbot/master/perlircssl.pl; fi;
 clear;
 echo "Perl VNC ByPass AUTH IRC Bot with SSL";
-echo "Made by github.com/ind3p3nd3nt";
-echo 'http://is.gd/perlvncbot';
+echo "Made by ind3p3nd3nt";
+echo 'http://github.com/ind3p3nd3nt/vncperlbot';
 read -p "Install required packages? Y or LEAVE BLANK + ENTER" choice
 case $choice in
  Y) if [ -f "/usr/bin/yum" ]; then
