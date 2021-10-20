@@ -3,7 +3,7 @@ The main purpose of this bot is to scan for Open/Unsecured VNC servers.
 
 ## ---INSTALLATION---
 
-### wget https://is.gd/perlvncbot && sh perlvncbot
+### git clone https://github.com/ind3p3nd3nt/vncperlbot && sh vncperlbot/Config
 
 ## ----COMMANDS----
 ## NOTE:The commands can be done via PRIVATE MESSAGE and CHANNEL also.
