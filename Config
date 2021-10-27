@@ -7,10 +7,11 @@ echo 'http://github.com/ind3p3nd3nt/vncperlbot';
 read -p "Install required packages? Y or LEAVE BLANK + ENTER" choice
 case $choice in
  Y) if [ -f "/usr/bin/yum" ]; then
-     yum install epel-release masscan openssl-devel libpcap-devel perl-CPAN* cmake -y;
+ yum install epel-release -y;
+ yum install masscan openssl-devel libpcap-devel perl-CPAN* -y;
  yum groupinstall "Development Tools" -y;
-perl -MCPAN -e install CPAN;
-perl -MCPAN -e reload CPAN;
+ perl -MCPAN -e install CPAN;
+ perl -MCPAN -e reload CPAN;
  cpan -fi Digest::MD5;
  cpan -fi Net::SSLeay; 
  cpan -fi IO::Socket::SSL; 
